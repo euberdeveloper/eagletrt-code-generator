@@ -1,6 +1,6 @@
 {
   "name": "@eagletrt/eagletrt-code-generator",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Generate dinamically code for the eagletrt telemetry",
   "main": "dist/source/lib/index.js",
   "bin": {
@@ -31,12 +31,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/euberdeveloper/eagletrt-code-generator.git"
+    "url": "git+https://github.com/eagletrt/eagletrt-code-generator.git"
   },
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/euberdeveloper/eagletrt-code-generator/issues"
+    "url": "https://github.com/eagletrt/eagletrt-code-generator/issues"
   },
   "keywords": [
     "eagletrt",
@@ -44,7 +44,7 @@
     "code-generator",
     "c-generator"
   ],
-  "homepage": "https://eagletrt-code-generator.euberdeveloper.now.sh",
+  "homepage": "https://eagletrt-code-generator.eagletrt.vercel.sh",
   "devDependencies": {
     "@euberdeveloper/eslint-config-typescript": "^3.0.0",
     "@types/chai": "^4.2.13",
