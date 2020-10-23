@@ -232,7 +232,7 @@ This model has the purpose of declaring the possible options, that can be nested
 
 It is an object that can contain:
 * `string` or `number` as primitive default values.
-* Arrays of `string` or `number` as default array values. These arrays __have to be homogeneus__ and there can be arrays of strings, integers (no decimal part) or floating point (no integer accepted).
+* Arrays of `string` or `number` as default array values. These arrays __have to be homogeneus__ and there can be arrays of strings, integers (no decimal part) or floating point (no integer accepted). Thet have to have at least one default value so that the generator can understand its C type.
 * Nested objects satisfying the two previous constraints in order to group related options together.
 
 An example of config could be this:
