@@ -5,6 +5,11 @@ import { generateEverything, getTemplateFilesPath, getCorrectFileNameFromTemplat
 import { Logger } from '../source/lib/utils/logger';
 import getGenerators from '../source/lib/generators';
 
+let originalLogFunction = console.log;
+console.log = () => {
+    return;
+};
+
 const paths = getTemplateFilesPath();
 generateEverything(paths.toTestPaths);
 for (let templateFilePath of paths.templateFilePaths) {
@@ -36,3 +41,6 @@ for (const toTestPath of paths.toTestPaths) {
 }
 
 fs.writeFileSync(path.join(testConfig.assetsPath, 'codereference.json'), JSON.stringify(referenceCode));
+
+console.log = originalLogFunction;
+console.log('Reference files generated');
