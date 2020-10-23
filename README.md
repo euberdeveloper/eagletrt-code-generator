@@ -326,9 +326,9 @@ The generators are the **typescript classes** that replace a certain **special c
 
 ## API
 
-Using **typedoc**, the documentation is published with **vercel** at [https://eagletrt-code-generator.eagletrt.now.sh](https://eagletrt-code-generator.eagletrt.now.sh).
+Using **typedoc**, the documentation is published with **vercel** at [https://eagletrt-code-generator.eagletrt.vercel.sh](https://eagletrt-code-generator.eagletrt.vercel.sh).
 
-The documentation for the mantainers is published with **vercel** at [https://eagletrt-code-generator-dev.eagletrt.now.sh](https://eagletrt-code-generator-dev.eagletrt.now.sh).
+The documentation for the mantainers is published with **vercel** at [https://eagletrt-code-generator-dev.eagletrt.vercel.sh](https://eagletrt-code-generator-dev.eagletrt.vercel.sh).
 
 ### generate
 

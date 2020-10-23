@@ -1,6 +1,6 @@
 {
   "name": "@eagletrt/eagletrt-code-generator",
-  "version": "2.5.1",
+  "version": "2.5.6",
   "description": "Generate dinamically code for the eagletrt telemetry",
   "main": "dist/source/lib/index.js",
   "bin": {
@@ -22,9 +22,6 @@
     "cover": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "docs:html": "typedoc --mode library --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html",
     "docs:html-dev": "typedoc --mode module --name 'eagletrt-code-generator - DEV' --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
-    "docs:deploy:html": "vercel docs/documentation/html --name eagletrt-code-generator --confirm --prod --token $VERCEL_TOKEN",
-    "docs:deploy:html-dev": "vercel docs/documentation/html-dev --name eagletrt-code-generator-dev --confirm --prod --token $VERCEL_TOKEN",
-    "docs:deploy": "npm run docs:deploy:html && npm run docs:deploy:html-dev",
     "docs:tree": "dree parse . --dest docs/directory-tree --name tree --options docs/directory-tree/dree.json",
     "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:deploy",
     "commit": "git-cz"
