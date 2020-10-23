@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/euberdeveloper/eagletrt-code-generator.svg?branch=master)](https://travis-ci.org/euberdeveloper/eagletrt-code-generator)
-[![Coverage Status](https://coveralls.io/repos/github/euberdeveloper/eagletrt-code-generator/badge.svg?branch=master)](https://coveralls.io/github/euberdeveloper/eagletrt-code-generator?branch=master)
+[![Build Status](https://travis-ci.org/eagletrt/eagletrt-code-generator.svg?branch=master)](https://travis-ci.org/eagletrt/eagletrt-code-generator)
+[![Coverage Status](https://coveralls.io/repos/github/eagletrt/eagletrt-code-generator/badge.svg?branch=master)](https://coveralls.io/github/eagletrt/eagletrt-code-generator?branch=master)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![dependencies Status](https://david-dm.org/euberdeveloper/eagletrt-code-generator/status.svg)](https://david-dm.org/euberdeveloper/eagletrt-code-generator)
-[![License](https://img.shields.io/npm/l/eagletrt-code-generator.svg)](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/LICENSE)
+[![dependencies Status](https://david-dm.org/eagletrt/eagletrt-code-generator/status.svg)](https://david-dm.org/eagletrt/eagletrt-code-generator)
+[![License](https://img.shields.io/npm/l/eagletrt-code-generator.svg)](https://github.com/eagletrt/eagletrt-code-generator/blob/master/LICENSE)
 [![Types](https://img.shields.io/npm/types/eagletrt-code-generator.svg)](https://www.npmjs.com/package/eagletrt-code-generator)
 
 # eagletrt-code-generator
@@ -222,7 +222,7 @@ A javascript instance of that structure could be:
 
 Where every array contains all the messages of a certain type, arrived in x milliseconds.
 
-The passed structure.model.json is checked with **[this json schema](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/source/lib/schemas/structure.schema.json)**.
+The passed structure.model.json is checked with **[this json schema](https://github.com/eagletrt/eagletrt-code-generator/blob/master/source/lib/schemas/structure.schema.json)**.
 
 ## The config model file
 
@@ -264,7 +264,7 @@ A config.json satisfying that model could be:
 
 Where the three specified values will override the default values specified in the config.model.json.
 
-The passed config.model.json is checked with **[this json schema](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/source/lib/schemas/config.schema.json)**.
+The passed config.model.json is checked with **[this json schema](https://github.com/eagletrt/eagletrt-code-generator/blob/master/source/lib/schemas/config.schema.json)**.
 
 ## The generators
 
@@ -274,61 +274,61 @@ The generators are the **typescript classes** that replace a certain **special c
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_BSON}} | Generates the code of the function that given the structure variable, creates the bson object | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_bson.template.c) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_bson.c) |
+| {{GENERATE_BSON}} | Generates the code of the function that given the structure variable, creates the bson object | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_bson.template.c) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_bson.c) |
 
 ### structure-type.generator
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_STRUCTURE_TYPE}} | Generates the c struct representing the structure | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_type.template.h) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_type.h) |
+| {{GENERATE_STRUCTURE_TYPE}} | Generates the c struct representing the structure | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_type.template.h) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_type.h) |
 
 ### structure-allocator.generator
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_STRUCTURE_ALLOCATOR}} | Generates the code of the function that allocates the structure | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_allocator.template.c) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_allocator.c) |
+| {{GENERATE_STRUCTURE_ALLOCATOR}} | Generates the code of the function that allocates the structure | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_allocator.template.c) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_allocator.c) |
 
 ### structure-deallocator.generator
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_STRUCTURE_DEALLOCATOR}} | Generates the code of the function that deallocates the structure | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_deallocator.template.c) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_deallocator.c) |
+| {{GENERATE_STRUCTURE_DEALLOCATOR}} | Generates the code of the function that deallocates the structure | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_deallocator.template.c) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_deallocator.c) |
 
 ### config-type.generator
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_CONFIG_TYPE}} | Generates the c struct representing the config | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_type.template.h) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_type.h) |
+| {{GENERATE_CONFIG_TYPE}} | Generates the c struct representing the config | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_type.template.h) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_type.h) |
 
 ### config-allocator.generator
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_CONFIG_ALLOCATOR}} | Generates the code of the function that allocates the config struct instance | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_allocator.template.c) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_allocator.c) |
+| {{GENERATE_CONFIG_ALLOCATOR}} | Generates the code of the function that allocates the config struct instance | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_allocator.template.c) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_allocator.c) |
 
 ### config-deallocator.generator
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_CONFIG_DEALLOCATOR}} | Generates the code of the function that deallocates the config struct instance | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_deallocator.template.c) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_deallocator.c) |
+| {{GENERATE_CONFIG_DEALLOCATOR}} | Generates the code of the function that deallocates the config struct instance | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_deallocator.template.c) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_deallocator.c) |
 
 ### config-print.generator
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_CONFIG_PRINT}} | Generates the code of the function that prints the config struct instance | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_print.template.c) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_print.c) |
+| {{GENERATE_CONFIG_PRINT}} | Generates the code of the function that prints the config struct instance | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_print.template.c) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_print.c) |
 
 ### config-parser.generator
 
 | Comment | Description | template example | compiled example |
 | --- | --- | --- | --- |
-| {{GENERATE_CONFIG_PARSER}} | Generates the code of the functions that parses the given json file and assigns it to the config struct instance | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_parser.template.c) | [link](https://github.com/euberdeveloper/eagletrt-code-generator/blob/master/docs/example/config_service/config_parser.c) |
+| {{GENERATE_CONFIG_PARSER}} | Generates the code of the functions that parses the given json file and assigns it to the config struct instance | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_parser.template.c) | [link](https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_parser.c) |
 
 ## API
 
-Using **typedoc**, the documentation is published with **vercel** at [https://eagletrt-code-generator.euberdeveloper.now.sh](https://eagletrt-code-generator.euberdeveloper.now.sh).
+Using **typedoc**, the documentation is published with **vercel** at [https://eagletrt-code-generator.eagletrt.now.sh](https://eagletrt-code-generator.eagletrt.now.sh).
 
-The documentation for the mantainers is published with **vercel** at [https://eagletrt-code-generator-dev.euberdeveloper.now.sh](https://eagletrt-code-generator-dev.euberdeveloper.now.sh).
+The documentation for the mantainers is published with **vercel** at [https://eagletrt-code-generator-dev.eagletrt.now.sh](https://eagletrt-code-generator-dev.eagletrt.now.sh).
 
 ### generate
 
@@ -360,7 +360,7 @@ This module was used in the telemetry sender [repo](https://github.com/eagletrt/
 
 
 <p align="center">
-  <img src="https://github.com/euberdeveloper/eagletrt-code-generator/raw/master/docs/videos/demo.gif">
+  <img src="https://github.com/eagletrt/eagletrt-code-generator/raw/master/docs/videos/demo.gif">
 </p>
 
 ## Test
@@ -388,7 +388,7 @@ The first version, that started by a javascript script in the main telemetry rep
 
 ## Project structure
 
-Made with [dree](https://github.com/euberdeveloper/dree)
+Made with [dree](https://github.com/eagletrt/dree)
 
 ```
 eagletrt-code-generator
