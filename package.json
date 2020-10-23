@@ -23,7 +23,6 @@
     "docs:html": "typedoc --mode library --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html",
     "docs:html-dev": "typedoc --mode module --name 'eagletrt-code-generator - DEV' --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
     "docs:tree": "dree parse . --dest docs/directory-tree --name tree --options docs/directory-tree/dree.json",
-    "docs": "npm run docs:html && npm run docs:html-dev && npm run docs:deploy",
     "commit": "git-cz"
   },
   "repository": {
