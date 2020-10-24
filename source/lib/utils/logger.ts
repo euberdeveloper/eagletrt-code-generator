@@ -16,7 +16,7 @@ export class Logger {
      * @param options The options given to the "generate" function. Used to determine the value of the field log.
      */
     public constructor(options: Options) {
-        this.log = options.log ?? true;
+        this.log = options.log === undefined ? false : options.log;
     }
 
     /**

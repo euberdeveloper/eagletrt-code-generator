@@ -38,7 +38,7 @@ export function getTemplateFilesPath(): { templateFilePaths: string[]; toTestPat
 
 export function generateEverything(toTestPaths: string[]): void {
     for (const toTestPath of toTestPaths) {
-        generate(path.join(toTestPath, 'templates'), path.join(toTestPath, 'structure.model.json'), path.join(toTestPath, 'config.model.json'));
+        generate(path.join(toTestPath, 'templates'), path.join(toTestPath, 'structure.model.json'), path.join(toTestPath, 'config.model.json'), { log: false });
     }
 }
 
