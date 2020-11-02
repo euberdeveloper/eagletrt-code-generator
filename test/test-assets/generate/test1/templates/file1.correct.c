@@ -91,27 +91,27 @@ printf("config->d:\t%f\n", config->d);
 printf("config->arr: ");
 printStringsArray(config->arr, config->arr_count);
 printf("config->arrr: ");
-printIntArray(config->arrr);
+printIntArray(config->arrr, config->arrr_count);
 printf("config->arrrr: ");
-printDoubleArray(config->arrrr);
+printDoubleArray(config->arrrr, config->arrrr_count);
 printf("config->obj1.a:\t%s\n", config->obj1.a);
 printf("config->obj1.b:\t%d\n", config->obj1.b);
 printf("config->obj1.d:\t%f\n", config->obj1.d);
 printf("config->obj1.arr: ");
 printStringsArray(config->obj1.arr, config->obj1.arr_count);
 printf("config->obj1.arrr: ");
-printIntArray(config->obj1.arrr);
+printIntArray(config->obj1.arrr, config->obj1.arrr_count);
 printf("config->obj1.arrrr: ");
-printDoubleArray(config->obj1.arrrr);
+printDoubleArray(config->obj1.arrrr, config->obj1.arrrr_count);
 printf("config->obj2.a:\t%s\n", config->obj2.a);
 printf("config->obj2.b:\t%d\n", config->obj2.b);
 printf("config->obj2.d:\t%f\n", config->obj2.d);
 printf("config->obj2.arr: ");
 printStringsArray(config->obj2.arr, config->obj2.arr_count);
 printf("config->obj2.arrr: ");
-printIntArray(config->obj2.arrr);
+printIntArray(config->obj2.arrr, config->obj2.arrr_count);
 printf("config->obj2.arrrr: ");
-printDoubleArray(config->obj2.arrrr);
+printDoubleArray(config->obj2.arrrr, config->obj2.arrrr_count);
 
 
 // -------------------

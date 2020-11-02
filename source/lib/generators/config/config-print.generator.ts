@@ -42,10 +42,10 @@ class ConfigPrintGenerator extends ConfigGenerator {
             this.print(`printStringsArray(${this.propName}, ${this.propCountName});`);
         }
         else if (type === 'double') {
-            this.print(`printDoubleArray(${this.propName});`);
+            this.print(`printDoubleArray(${this.propName}, ${this.propCountName});`);
         }
         else if (type === 'int') {
-            this.print(`printIntArray(${this.propName});`);
+            this.print(`printIntArray(${this.propName}, ${this.propCountName});`);
         }
     }
 
