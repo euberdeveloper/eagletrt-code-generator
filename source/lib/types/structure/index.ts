@@ -1,7 +1,7 @@
 /**
  * The primitive types for StructureModel.
  */
-export type StructurePrimitive = 'int' | 'long' | 'double' | 'char*';
+export type StructurePrimitive = 'int' | 'long' | 'float' | 'double' | 'char*';
 
 /**
  * The type of the details of a message.

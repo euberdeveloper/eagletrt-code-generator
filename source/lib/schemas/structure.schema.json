@@ -7,7 +7,7 @@
     "definitions": {
         "simple-value": {
             "type": "string",
-            "enum": ["int", "double", "long", "char*"]
+            "enum": ["int", "float", "double", "long", "char*"]
         },
         "complex-value": {
             "type": "object",

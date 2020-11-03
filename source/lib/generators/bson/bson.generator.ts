@@ -165,6 +165,7 @@ class BsonGenerator extends Generator {
             case 'long':
                 this.print(`BSON_APPEND_INT64(${this.parsedDepth}, "${this.currentKey}", data${this.parsedKeys});`);
                 break;
+            case 'float':
             case 'double':
                 this.print(`BSON_APPEND_DOUBLE(${this.parsedDepth}, "${this.currentKey}", data${this.parsedKeys});`);
                 break;
