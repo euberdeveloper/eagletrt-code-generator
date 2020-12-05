@@ -34,5 +34,7 @@ jobs:
           npm run nyc
 
       - name: Send coverage report to Coveralls
-        run: npm run cover
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
         
