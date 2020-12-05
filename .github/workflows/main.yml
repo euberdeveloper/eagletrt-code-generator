@@ -1,0 +1,29 @@
+name: Test, coverage and documentation
+
+on:
+  [push]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Use NodeJS LTS
+        uses: actions/setup-node@v1
+        with:
+          node-version: lts
+      
+      - name: Install node dependencies
+        run: npm i
+      
+      - name: Transpile code
+        run: npm run transpile
+      
+      - name: Lint code
+        run: npm run lint
+        
+      - name: Test code and generate coverage report
+        run: npm run nyc
+        
