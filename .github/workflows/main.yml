@@ -20,7 +20,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: Install node dependencies
-        run: npm i
+        run: npm install
       
       - name: Transpile code
         run: npm run transpile
@@ -29,5 +29,7 @@ jobs:
         run: npm run lint
         
       - name: Test code and generate coverage report
-        run: npm run nyc
+        run: |          
+          npm run test:generate-reference
+          npm run nyc
         
