@@ -382,7 +382,7 @@ npm test
 * Json schemas for the validation of the json models given as inputs have been added.
 * Tests have been added
 
-## Version 1
+### Version 1
 
 The first version, that started by a javascript script in the main telemetry repository and have become this typescript package.
 
