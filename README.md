@@ -396,8 +396,17 @@ Made with [dree](https://github.com/eagletrt/dree)
 eagletrt-code-generator
  ├── LICENSE
  ├── README.md
+ ├── typedoc.js
+ ├── typedoc.dev.js
+ ├── webpack.config.js
  ├── package-lock.json
  ├── package.json
+ ├─> bundled
+ │   ├─> lib
+ │   │   ├─> index.js
+ │   │   └─> index.d.ts
+ │   └─> bin
+ │   │   └─> index.js
  ├─> dist
  │   ├─> source
  │   │   ├─> bin
