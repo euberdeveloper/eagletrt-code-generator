@@ -34,21 +34,24 @@ yargs
         },
         'structure-model': {
             alias: 's',
-            describe: 'The path to the json file containing the structure model, used by generators to dynamically generate code about the data structure. The default is structure.model.json.',
+            describe:
+                'The path to the json file containing the structure model, used by generators to dynamically generate code about the data structure. The default is structure.model.json.',
             type: 'string',
             default: 'structure.model.json'
         },
         'config-model': {
             alias: 'c',
-            describe: 'The path to the json file containing the config model, used by generators to dynamically generate code about the config parser. The default is config.model.json.',
+            describe:
+                'The path to the json file containing the config model, used by generators to dynamically generate code about the config parser. The default is config.model.json.',
             type: 'string',
             default: 'config.model.json'
         },
         'extensions': {
-            describe: 'An array of string representing the extensions that will be considered. Default undefined, all extensions will be considered',
+            describe:
+                'An array of string representing the extensions that will be considered. Default undefined, all extensions will be considered',
             type: 'array',
             default: undefined,
-            coerce: value => value[0] === undefined ? undefined : value
+            coerce: value => (value[0] === undefined ? undefined : value)
         },
         'log': {
             describe: 'If the log will be shown on the terminal',
@@ -61,11 +64,13 @@ yargs
             default: true
         },
         'exclude': {
-            describe: 'An array of strings that will be converted to RegExp, whose matching paths will be ignored. Default: "node_modules"',
+            describe:
+                'An array of strings that will be converted to RegExp, whose matching paths will be ignored. Default: "node_modules"',
             type: 'array',
-            default: [ 'node_modules' ],
+            default: ['node_modules'],
             coerce: value => value.map((el: string) => new RegExp(el))
         }
     })
-    .epilogue('For more information, find our manual at https://github.com/euberdeveloper/eagletrt-code-generator#readme')
-    .argv;
+    .epilogue(
+        'For more information, find our manual at https://github.com/euberdeveloper/eagletrt-code-generator#readme'
+    ).argv;

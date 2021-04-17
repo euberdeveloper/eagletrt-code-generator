@@ -5,7 +5,6 @@ import { ConfigGenerator } from './configGenerator';
  * The ConfigTypeGenerator class, extending the ConfigGenerator class and generating the code that defines the config structure's struct.
  */
 class ConfigTypeGenerator extends ConfigGenerator {
-
     /**
      * The template comment that this generator handles.
      */
@@ -23,17 +22,16 @@ class ConfigTypeGenerator extends ConfigGenerator {
      * The index of the struct that is being currently generated.
      */
     private cursor = -1;
-    
+
     /**
      * The constructor of the ConfigTypeGenerator class.
      * @param structure The structure model: the generated code will not actually depend on it.
      * @param config The config model: the generated code will depend on it.
      */
-    public constructor(structure: StructureModel, config: ConfigModel) {
+    constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
         this.generate();
     }
-
 
     /**
      * Prints the given string to the current cursor, formatting it.
@@ -47,9 +45,7 @@ class ConfigTypeGenerator extends ConfigGenerator {
      * The strings of indentation tabs, dependent by the indentation field.
      */
     private get indentationTabs(): string {
-        return Array(this.indentation)
-            .fill('\t')
-            .join('');
+        return Array(this.indentation).fill('\t').join('');
     }
 
     /**
@@ -58,7 +54,7 @@ class ConfigTypeGenerator extends ConfigGenerator {
     private addStruct(): void {
         this.structs.splice(this.cursor + 1, 0, '');
     }
-    
+
     /**
      * Given a primitive value generates the code about it.
      * @param data The primitive value.
@@ -94,13 +90,11 @@ class ConfigTypeGenerator extends ConfigGenerator {
         for (const key in data) {
             if (Array.isArray(data[key])) {
                 this.parsePrimitiveArray(data[key] as ConfigPrimitiveArray, key);
-            }
-            else if (typeof data[key] === 'object') {
+            } else if (typeof data[key] === 'object') {
                 this.parse(data[key] as ConfigModel, key);
                 this.print(`${this.structName} ${key};`);
                 this.keys.pop();
-            }
-            else {
+            } else {
                 this.parsePrimitive(data[key] as ConfigPrimitive, key);
             }
         }
@@ -117,7 +111,6 @@ class ConfigTypeGenerator extends ConfigGenerator {
         this.parse(this.config, 'config_t');
         this.code = this.structs.reverse().join('\n');
     }
-
 }
 
 export { ConfigTypeGenerator as generator };

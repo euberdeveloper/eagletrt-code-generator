@@ -2,11 +2,14 @@ const path = require('path');
 
 module.exports = {
     parserOptions: {
-        ecmaVersion: 2018,
-        sourceType: 'module',
-        project: path.join(__dirname, 'tsconfig.json')
+        project: path.join(__dirname, 'tsconfig.json') // The path to your tsconfig.json
     },
-    extends: ['@euberdeveloper/typescript'],
+    plugins: ['@euberdeveloper'],
+    extends: [
+        'plugin:@euberdeveloper/typescript',
+        'plugin:@euberdeveloper/mocha',
+        'plugin:@euberdeveloper/prettier'
+    ],
     rules: {
         '@typescript-eslint/no-require-imports': 'off',
         '@typescript-eslint/no-invalid-this': 'off',

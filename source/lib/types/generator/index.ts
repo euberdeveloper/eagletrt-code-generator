@@ -18,16 +18,27 @@ export interface Code {
 /**
  * The class that all generators extends.
  */
-export class Generator {
+export abstract class Generator {
+
+    /**
+     * The generated code.
+     */
+     protected code = '';
 
     /**
      * The template comment that this generator handles.
      */
-    protected comment: string;
+    protected abstract comment: string;
+
     /**
-     * The generated code.
+     * Returns the generated Code object.
      */
-    protected code = '';
+    public get generated(): Code {
+        return {
+            comment: this.comment,
+            code: this.code
+        };
+    }
 
     /**
      * The constructor of the Generator class.
@@ -47,18 +58,6 @@ export class Generator {
     /**
      * The function that generates the code and assigns it to the code field.
      */
-    protected generate(): void {
-        this.code = '';
-    }
-
-    /**
-     * Returns the generated Code object.
-     */
-    public get generated(): Code {
-        return {
-            comment: this.comment,
-            code: this.code
-        };
-    }
+    protected abstract generate(): void;
 
 }

@@ -5,7 +5,6 @@ import { ConfigGenerator } from './configGenerator';
  * The ConfigPrintGenerator class, extending the ConfigGenerator class and generating the code that prints a config structure.
  */
 class ConfigPrintGenerator extends ConfigGenerator {
-    
     /**
      * The template comment that this generator handles.
      */
@@ -16,7 +15,7 @@ class ConfigPrintGenerator extends ConfigGenerator {
      * @param structure The structure model: the generated code will not actually depend on it.
      * @param config The config model: the generated code will depend on it.
      */
-    public constructor(structure: StructureModel, config: ConfigModel) {
+    constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
         this.generate();
     }
@@ -37,14 +36,12 @@ class ConfigPrintGenerator extends ConfigGenerator {
     private printPrimitiveArray(data: ConfigPrimitiveArray) {
         const type = this.getPrimitiveType(data[0]);
         this.print(`printf("${this.propName}: ");`);
-        
+
         if (type === 'char*') {
             this.print(`printStringsArray(${this.propName}, ${this.propCountName});`);
-        }
-        else if (type === 'double') {
+        } else if (type === 'double') {
             this.print(`printDoubleArray(${this.propName}, ${this.propCountName});`);
-        }
-        else if (type === 'int') {
+        } else if (type === 'int') {
             this.print(`printIntArray(${this.propName}, ${this.propCountName});`);
         }
     }
@@ -61,11 +58,9 @@ class ConfigPrintGenerator extends ConfigGenerator {
                 this.keys.push(key);
                 this.printPrimitiveArray(data[key] as ConfigPrimitiveArray);
                 this.keys.pop();
-            }
-            else if (typeof data[key] === 'object') {
+            } else if (typeof data[key] === 'object') {
                 this.parse(data[key] as ConfigModel, key);
-            }
-            else {
+            } else {
                 this.keys.push(key);
                 this.printPrimitive(data[key] as ConfigPrimitive);
                 this.keys.pop();
@@ -80,8 +75,6 @@ class ConfigPrintGenerator extends ConfigGenerator {
     protected generate(): void {
         this.parse(this.config, 'config');
     }
-
-
 }
 
 export { ConfigPrintGenerator as generator };

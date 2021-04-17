@@ -5,7 +5,6 @@ import { ConfigGenerator } from './configGenerator';
  * The ConfigAllocatorGenerator class, extending the ConfigGenerator class and generating the code that allocates a config structure.
  */
 class ConfigAllocatorGenerator extends ConfigGenerator {
-
     /**
      * The template comment that this generator handles.
      */
@@ -16,7 +15,7 @@ class ConfigAllocatorGenerator extends ConfigGenerator {
      * @param structure The structure model: the generated code will not actually depend on it.
      * @param config The config model: the generated code will depend on it.
      */
-    public constructor(structure: StructureModel, config: ConfigModel) {
+    constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
         this.generate();
     }
@@ -27,7 +26,7 @@ class ConfigAllocatorGenerator extends ConfigGenerator {
      */
     private parsePrimitive(defaultValue: ConfigPrimitive): void {
         const type = this.getPrimitiveType(defaultValue);
-        const handledDefaultValue = (type === 'char*') ? `strdup("${defaultValue}")` : defaultValue;
+        const handledDefaultValue = type === 'char*' ? `strdup("${defaultValue}")` : defaultValue;
         this.print(`${this.propName} = ${handledDefaultValue};`);
     }
 
@@ -60,11 +59,9 @@ class ConfigAllocatorGenerator extends ConfigGenerator {
                 this.keys.push(key);
                 this.parsePrimitiveArray(data[key] as ConfigPrimitiveArray);
                 this.keys.pop();
-            }
-            else if (typeof data[key] === 'object') {
+            } else if (typeof data[key] === 'object') {
                 this.parse(data[key] as ConfigModel, key);
-            }
-            else {
+            } else {
                 this.keys.push(key);
                 this.parsePrimitive(data[key] as ConfigPrimitive);
                 this.keys.pop();
@@ -80,7 +77,6 @@ class ConfigAllocatorGenerator extends ConfigGenerator {
     protected generate(): void {
         this.parse(this.config, `config`);
     }
-
 }
 
 export { ConfigAllocatorGenerator as generator };

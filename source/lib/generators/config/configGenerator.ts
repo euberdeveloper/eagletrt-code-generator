@@ -3,8 +3,7 @@ import { ConfigModel, ConfigPrimitive, Generator, StructureModel } from '../../t
 /**
  * The ConfigGenerator class, extending the Generator class and giving a blueprint for all the generators regarding the config.
  */
-export class ConfigGenerator extends Generator {
-
+export abstract class ConfigGenerator extends Generator {
     /**
      * A stack of inspected keys.
      */
@@ -15,7 +14,7 @@ export class ConfigGenerator extends Generator {
      * @param structure The structure model: the generated code will not actually depend on it.
      * @param config The config model: the generated code will depend on it.
      */
-    public constructor(structure: StructureModel, config: ConfigModel) {
+    constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
     }
 
@@ -30,11 +29,12 @@ export class ConfigGenerator extends Generator {
      * Given the current inspected keys, returns the name of parsing functions.
      */
     protected get functionName(): string {
-        function handleKey(key: string): string  {
+        function handleKey(key: string): string {
             for (let i = key.indexOf('_'); i !== -1; i = key.indexOf('_')) {
-                key = i !== key.length - 1
-                    ? key.slice(0, i) + key.charAt(i + 1).toUpperCase() + key.slice(i + 2, key.length)
-                    : key;
+                key =
+                    i !== key.length - 1
+                        ? key.slice(0, i) + key.charAt(i + 1).toUpperCase() + key.slice(i + 2, key.length)
+                        : key;
             }
 
             return `${key.charAt(0).toUpperCase()}${key.slice(1)}`;
@@ -42,9 +42,9 @@ export class ConfigGenerator extends Generator {
 
         return this.keys.length > 1
             ? this.keys
-                .slice(1)
-                .filter(key => typeof key === 'string')
-                .reduce<string>((acc, curr) => acc + handleKey(curr as string), 'parse') + 'Object'
+                  .slice(1)
+                  .filter(key => typeof key === 'string')
+                  .reduce<string>((acc, curr) => acc + handleKey(curr as string), 'parse') + 'Object'
             : 'parseJsonTokens';
     }
 
@@ -52,7 +52,7 @@ export class ConfigGenerator extends Generator {
      * Given the current inspected keys, returns the string that in c access that property.
      */
     protected get propName(): string {
-        function handleKey(key: string | number): string  {
+        function handleKey(key: string | number): string {
             return typeof key === 'string' ? `.${key}` : `[${key}]`;
         }
 
@@ -69,18 +69,21 @@ export class ConfigGenerator extends Generator {
         const last = this.keys.length - 1;
         return `${this.keys[last]}_count`;
     }
-    
+
     /**
      * Given the current inspected keys, returns the string that in c access that property, adding _count at the end.
      */
     protected get propCountName(): string {
-        function handleKey(key: string | number): string  {
+        function handleKey(key: string | number): string {
             return typeof key === 'string' ? `.${key}` : `[${key}]`;
         }
 
         const last = this.keys.length - 1;
-        return `${this.keys.slice(1, last).reduce<string>((accumulator, current) => accumulator += handleKey(current), this.keys[0].toString())}.${this.countName}`
-            .replace('.', '->');
+        return `${this.keys
+            .slice(1, last)
+            .reduce<string>((accumulator, current) => (accumulator += handleKey(current)), this.keys[0].toString())}.${
+            this.countName
+        }`.replace('.', '->');
     }
 
     /**
@@ -91,14 +94,11 @@ export class ConfigGenerator extends Generator {
     protected getPrimitiveType(data: ConfigPrimitive): 'char*' | 'int' | 'double' | '' {
         if (typeof data === 'string') {
             return 'char*';
-        }
-        else if (typeof data === 'number' && data - Math.floor(data) === 0) {
+        } else if (typeof data === 'number' && data - Math.floor(data) === 0) {
             return 'int';
-        }
-        else if (typeof data === 'number' && data - Math.floor(data) !== 0) {
+        } else if (typeof data === 'number' && data - Math.floor(data) !== 0) {
             return 'double';
-        }
-        else {
+        } else {
             return '';
         }
     }
@@ -111,16 +111,12 @@ export class ConfigGenerator extends Generator {
     protected getPrimitivePrintfFormatter(data: ConfigPrimitive): string {
         if (typeof data === 'string') {
             return '%s';
-        }
-        else if (typeof data === 'number' && data - Math.floor(data) === 0) {
+        } else if (typeof data === 'number' && data - Math.floor(data) === 0) {
             return '%d';
-        }
-        else if (typeof data === 'number' && data - Math.floor(data) !== 0) {
+        } else if (typeof data === 'number' && data - Math.floor(data) !== 0) {
             return '%f';
-        }
-        else {
+        } else {
             return '';
         }
     }
-
 }

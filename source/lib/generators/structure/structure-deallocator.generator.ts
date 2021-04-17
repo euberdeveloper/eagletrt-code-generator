@@ -1,11 +1,10 @@
-import { ConfigModel, StructureGroup, StructureMessages, StructureModel } from '../../types';
+import { ConfigModel, StructureMessagesGroup, StructureModel } from '../../types';
 import { StructureGenerator } from './structureGenerator';
 
 /**
  * The StructureDeallocatorGenerator class, extending the StructureGenerator class and generating the code that deallocates a data structure.
  */
 class StructureDeallocatorGenerator extends StructureGenerator {
-
     /**
      * The template comment that this generator handles.
      */
@@ -16,7 +15,7 @@ class StructureDeallocatorGenerator extends StructureGenerator {
      * @param structure The structure model: the generated code will depend on it.
      * @param config The config model: the generated code will not actually depend on it.
      */
-    public constructor(structure: StructureModel, config: ConfigModel) {
+    constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
         this.generate();
     }
@@ -25,17 +24,16 @@ class StructureDeallocatorGenerator extends StructureGenerator {
      * Given the structure model generates the code that deallocates the data structure.
      * @param data The structure model or one of its nested property values.
      */
-    private parse(data: StructureGroup | StructureMessages): void {
+    private parse(data: StructureMessagesGroup): void {
         for (const key in data) {
-            if (Array.isArray(data[key])) {
+            const child = data[key];
+            if (Array.isArray(child)) {
                 this.keys.push(key);
-                this.parse(data[key][0]);
                 this.print(`free(data${this.propName});`);
                 this.keys.pop();
-            }
-            else if (typeof data[key] === 'object') {
+            } else if (typeof child === 'object') {
                 this.keys.push(key);
-                this.parse(data[key]);
+                this.parse(child);
                 this.keys.pop();
             }
         }
@@ -48,7 +46,6 @@ class StructureDeallocatorGenerator extends StructureGenerator {
         this.parse(this.structure);
         this.print(`free(data);`);
     }
-
 }
 
 export { StructureDeallocatorGenerator as generator };

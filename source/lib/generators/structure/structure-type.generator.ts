@@ -1,11 +1,10 @@
-import { ConfigModel, StructureGroup, StructureMessages, StructureModel } from '../../types';
+import { ConfigModel, StructureMessagesGroup, StructureModel, StructureValuePrimitive } from '../../types';
 import { StructureGenerator } from './structureGenerator';
 
 /**
  * The StructureTypeGenerator class, extending the StructureGenerator class and generating the code that defines the data structure's struct.
  */
 class StructureTypeGenerator extends StructureGenerator {
-    
     /**
      * The template comment that this generator handles.
      */
@@ -28,7 +27,7 @@ class StructureTypeGenerator extends StructureGenerator {
      * @param structure The structure model: the generated code will depend on it.
      * @param config The config model: the generated code will not actually depend on it.
      */
-    public constructor(structure: StructureModel, config: ConfigModel) {
+    constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
         this.generate();
     }
@@ -52,9 +51,7 @@ class StructureTypeGenerator extends StructureGenerator {
      * The strings of indentation tabs, dependent by the indentation field.
      */
     private get indentationTabs(): string {
-        return Array(this.indentation)
-            .fill('\t')
-            .join('');
+        return Array(this.indentation).fill('\t').join('');
     }
 
     /**
@@ -69,7 +66,7 @@ class StructureTypeGenerator extends StructureGenerator {
      * @param data The structure model or one of its nested property values.
      * @param name The name of the current key.
      */
-    private parse(data: StructureGroup | StructureMessages, name: string): void {
+    private parse(data: StructureMessagesGroup | Record<string, StructureValuePrimitive>, name: string): void {
         this.addStruct();
         this.keys.push(name);
         this.cursor++;
@@ -77,20 +74,20 @@ class StructureTypeGenerator extends StructureGenerator {
         this.print(`typedef struct {`);
         this.indentation = 1;
         for (const key in data) {
-            if (Array.isArray(data[key])) {
-                this.parse(data[key][0], key);
+            const child = data[key];
+            if (Array.isArray(child)) {
+                const message = child[0];
+                this.parse({ timestamp: message.timestamp, value: message.value as StructureValuePrimitive }, key);
                 this.print(`${this.structName} *${key};`);
                 this.print(`int ${this.countName};`);
                 this.print(`int ${this.sizeName};`);
                 this.keys.pop();
-            }
-            else if (typeof data[key] === 'object') {
-                this.parse(data[key], key);
+            } else if (typeof child === 'object') {
+                this.parse(child, key);
                 this.print(`${this.structName} ${key};`);
                 this.keys.pop();
-            }
-            else {
-                this.print(`${data[key] as (number | string)} ${key};`);
+            } else {
+                this.print(`${child as number | string} ${key};`);
             }
         }
         this.indentation = 0;
@@ -103,10 +100,9 @@ class StructureTypeGenerator extends StructureGenerator {
      * The function that generates the code and assigns it to the code field.
      */
     protected generate(): void {
-        this.parse(this.structure, 'data_t');
+        this.parse(this.parsedStructure, 'data_t');
         this.code = this.structs.reverse().join('\n');
     }
-
 }
 
 export { StructureTypeGenerator as generator };

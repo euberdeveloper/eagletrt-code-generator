@@ -3,10 +3,10 @@ import { Generator } from '../types';
 import { Logger } from '../utils/logger';
 
 /**
- * Returns all the generators classes, dynamically importing all the .generator files in the "generators" folder, analyizing in depth its directory structure. 
- * @param logger 
+ * Returns all the generators classes, dynamically importing all the .generator files in the "generators" folder, analyizing in depth its directory structure.
+ * @param logger
  */
-export default function(logger: Logger): typeof Generator[] {
+export default function (logger: Logger): typeof Generator[] {
     const generators: typeof Generator[] = [];
     logger.info('Fetching code generators');
 
