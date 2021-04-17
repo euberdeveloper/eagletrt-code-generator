@@ -1,4 +1,4 @@
-name: Test, coverage and documentation
+name: Build
 
 on:
   [push]
@@ -25,16 +25,3 @@ jobs:
       - name: Transpile code
         run: npm run transpile
       
-      - name: Lint code
-        run: npm run lint
-        
-      - name: Test code and generate coverage report
-        run: |          
-          npm run test:generate-reference
-          npm run nyc
-
-      - name: Send coverage report to Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-        
