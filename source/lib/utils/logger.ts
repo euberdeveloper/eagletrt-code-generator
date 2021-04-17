@@ -38,11 +38,8 @@ export class Logger {
      */
     public info(str: string, tag?: string, path?: boolean): void {
         if (this.log) {
-            //TODO: fix eslint error
-            // const colouredTag = chalk.bold.blue(`[${tag || 'INFO'}]`);
             const colouredTag = chalk.bold.blue(`[${tag ?? 'INFO'}]`);
-            // const text = path ? this.formatPath(str) : str;
-            const text = path ?? false ? this.formatPath(str) : str;
+            const text = path ? this.formatPath(str) : str;
             console.log(`${colouredTag} ${text}`);
         }
     }
@@ -55,10 +52,8 @@ export class Logger {
      */
     public succ(str: string, tag?: string, path?: boolean): void {
         if (this.log) {
-            // TODO: fix eslint error
-            //const colouredTag = chalk.bold.green(`[${tag || 'SUCCESS'}]`);
             const colouredTag = chalk.bold.green(`[${tag ?? 'SUCCESS'}]`);
-            const text = path ?? false ? this.formatPath(str) : str;
+            const text = path ? this.formatPath(str) : str;
             console.log(`${colouredTag} ${text}`);
         }
     }
