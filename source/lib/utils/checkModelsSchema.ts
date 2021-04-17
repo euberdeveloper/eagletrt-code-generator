@@ -15,7 +15,7 @@ export function checkModelsSchema(
     structureModel: string,
     configModel: string
 ): { structureModelObject: StructureModel; configModelObject: ConfigModel } {
-    const ajv = new Ajv();
+    const ajv = new Ajv({ allowMatchingProperties: true });
 
     const structureModelObject: StructureModel = JSON.parse(readFileSync(structureModel, 'utf-8'));
     const configModelObject: ConfigModel = JSON.parse(readFileSync(configModel, 'utf-8'));
