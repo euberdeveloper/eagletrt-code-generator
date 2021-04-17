@@ -26,9 +26,9 @@
     "test": "mocha ./dist/test/test/**/*.test.js --reporter spec",
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov -x \"source/test\" npm run test",
     "cover": "nyc report --extension=ts --reporter=text-lcov | coveralls",
-    "docs:html": "typedoc --mode library --inputFiles source/lib/index.ts --excludeExternals --excludeNotExported --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html",
-    "docs:html-dev": "typedoc --mode module --name 'eagletrt-code-generator - DEV' --includeVersion --tsconfig source/tsconfig.json --out docs/documentation/html-dev",
-    "docs:tree": "dree parse . --dest docs/directory-tree --name tree --options docs/directory-tree/dree.json",
+    "docs:html": "typedoc",
+    "docs:html-dev": "typedoc --options typedoc.dev.js",
+    "docs": "npm run docs:html && npm run docs:html-dev",
     "commit": "git-cz"
   },
   "repository": {
