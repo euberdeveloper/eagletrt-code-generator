@@ -1,4 +1,6 @@
-[![Github Actions](https://github.com/eagletrt/eagletrt-code-generator/workflows/Test,%20coverage%20and%20documentation/badge.svg)](https://github.com/eagletrt/eagletrt-code-generator/actions)
+![Lint](https://github.com/euberdeveloper/euberlog/workflows/Lint/badge.svg)
+![Build](https://github.com/euberdeveloper/euberlog/workflows/Build/badge.svg)
+![Test](https://github.com/euberdeveloper/euberlog/workflows/Test/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/eagletrt/eagletrt-code-generator/badge.svg?branch=master)](https://coveralls.io/github/eagletrt/eagletrt-code-generator?branch=master)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![dependencies Status](https://david-dm.org/eagletrt/eagletrt-code-generator/status.svg)](https://david-dm.org/eagletrt/eagletrt-code-generator)
