@@ -2,9 +2,9 @@
     "$id": "https://eagletrt.it/telemetria-code-generator/structure.schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Structure Model",
-    "description": "v1.0 - 2020/10/08 / The schema for the structure.model.json of the telemetria-code-generator",
+    "description": "v2.0 - 2021/04/18 / The schema for the structure.model.json of the telemetria-code-generator",
     "definitions": {
-        "simple-value": {
+        "primitive-value": {
             "type": "string",
             "enum": [
                 "int",
@@ -14,7 +14,28 @@
                 "char*"
             ]
         },
-        "complex-value": {
+        "definition-value": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/primitive-value"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "simple-value": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/primitive-value"
+                },
+                {
+                    "$ref": "#/definitions/definition-value"
+                }
+            ]
+        },
+        "composite-value": {
             "type": "object",
             "patternProperties": {
                 "^(?=^[A-Za-z]\\w*$)(?=^\\w*[A-Za-z0-9]$)(?!^.*__.*$).*$": {
@@ -23,10 +44,17 @@
             },
             "additionalProperties": false
         },
+        "network-value": {
+            "type": "string",
+            "enum": [
+                "PRIMARY",
+                "SECONDARY"
+            ]
+        },
         "id": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/simple-value"
+                    "$ref": "#/definitions/primitive-value"
                 },
                 {
                     "const": "int"
@@ -36,7 +64,7 @@
         "timestamp": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/simple-value"
+                    "$ref": "#/definitions/primitive-value"
                 },
                 {
                     "const": "long"
@@ -46,7 +74,7 @@
         "session-name": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/simple-value"
+                    "$ref": "#/definitions/primitive-value"
                 },
                 {
                     "const": "char*"
@@ -60,23 +88,39 @@
                     "$ref": "#/definitions/timestamp"
                 },
                 "value": {
-                    "oneOf": [
+                    "anyOf": [
                         {
                             "$ref": "#/definitions/simple-value"
                         },
                         {
-                            "$ref": "#/definitions/complex-value"
+                            "$ref": "#/definitions/composite-value"
                         }
                     ]
                 },
                 "maxLength": {
                     "type": "integer",
                     "exclusiveMinimum": 0
+                },
+                "message": {
+                    "type": "string"
+                },
+                "network": {
+                    "$ref": "#/definitions/network-value"
+                },
+                "defines": {
+                    "type": "object",
+                    "patternProperties": {
+                        "^(?=^[A-Za-z]\\w*$)(?=^\\w*[A-Za-z0-9]$)(?!^.*__.*$).*$": {
+                            "$ref": "#/definitions/definition-value"
+                        }
+                    },
+                    "additionalProperties": false
                 }
             },
             "required": [
                 "timestamp",
-                "value"
+                "value",
+                "maxLength"
             ],
             "additionalProperties": false
         },
@@ -91,7 +135,7 @@
             ]
         },
         "recursive-model": {
-            "oneOf": [
+            "anyOf": [
                 {
                     "$ref": "#/definitions/simple-value"
                 },
