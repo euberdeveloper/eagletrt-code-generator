@@ -1,4 +1,4 @@
-import * as Ajv from 'ajv';
+import Ajv from 'ajv';
 import { readFileSync } from 'fs';
 
 import * as structureSchema from '../schemas/structure.schema.json';
@@ -11,7 +11,10 @@ import { ConfigModel, StructureModel } from '../types';
  * @param configModel The path of the json config model.
  * @return An object containing the structure and config models.
  */
-export function checkModelsSchema(structureModel: string, configModel: string): { structureModelObject: StructureModel; configModelObject: ConfigModel } {
+export function checkModelsSchema(
+    structureModel: string,
+    configModel: string
+): { structureModelObject: StructureModel; configModelObject: ConfigModel } {
     const ajv = new Ajv();
 
     const structureModelObject: StructureModel = JSON.parse(readFileSync(structureModel, 'utf-8'));

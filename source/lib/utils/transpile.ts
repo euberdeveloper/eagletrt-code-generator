@@ -5,7 +5,6 @@ import { Options, Code } from '../types';
 import { parseTemplate } from './parseTemplate';
 import { Logger } from './logger';
 
-
 /**
  * Properly transpiles the source folder, generating a file for each template file and substituting the template comment with the generated piece of code.
  * @param src The path of the directory to transpile.
@@ -13,7 +12,7 @@ import { Logger } from './logger';
  * @param options The options passed to the "generate" function.
  * @param logger The Logger instance.
  */
-export function transpile(src: string, codes: Code[], options: Options, logger: Logger): void { 
+export function transpile(src: string, codes: Code[], options: Options, logger: Logger): void {
     // Get scan options
     const scanOptions: ScanOptions = {
         exclude: options.exclude,
@@ -21,7 +20,7 @@ export function transpile(src: string, codes: Code[], options: Options, logger: 
     };
 
     logger.info('Generating files from templates');
-    
+
     // Scan all the files in the directory tree of the src folder
     scan(src, scanOptions, file => {
         // If the file is a template file
@@ -34,7 +33,7 @@ export function transpile(src: string, codes: Code[], options: Options, logger: 
             const generatedPath = file.path.replace('.template', '');
             // Write the generated file
             writeFileSync(generatedPath, generated);
-            
+
             // Log the event
             logger.succ(file.relativePath.replace('.template', ''), 'GENERATED', true);
         }

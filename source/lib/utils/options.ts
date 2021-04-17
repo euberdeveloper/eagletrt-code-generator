@@ -22,6 +22,6 @@ export function mergeOptions(options?: Options): Options {
     for (const key in DEFAULT_OPTIONS) {
         merged[key] = options[key] === undefined ? DEFAULT_OPTIONS[key] : options[key];
     }
-    
+
     return merged;
 }

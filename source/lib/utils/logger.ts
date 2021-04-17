@@ -5,7 +5,6 @@ import { Options } from '../types';
  * The logger class, used in the package to format the logs.
  */
 export class Logger {
-
     /**
      * If false, the log will not be logged.
      */
@@ -15,7 +14,7 @@ export class Logger {
      * The constructor of the Logger class.
      * @param options The options given to the "generate" function. Used to determine the value of the field log.
      */
-    public constructor(options: Options) {
+    constructor(options: Options) {
         this.log = options.log === undefined ? false : options.log;
     }
 
@@ -43,7 +42,7 @@ export class Logger {
             // const colouredTag = chalk.bold.blue(`[${tag || 'INFO'}]`);
             const colouredTag = chalk.bold.blue(`[${tag ?? 'INFO'}]`);
             // const text = path ? this.formatPath(str) : str;
-            const text = (path ?? false) ? this.formatPath(str) : str;
+            const text = path ?? false ? this.formatPath(str) : str;
             console.log(`${colouredTag} ${text}`);
         }
     }
@@ -59,7 +58,7 @@ export class Logger {
             // TODO: fix eslint error
             //const colouredTag = chalk.bold.green(`[${tag || 'SUCCESS'}]`);
             const colouredTag = chalk.bold.green(`[${tag ?? 'SUCCESS'}]`);
-            const text = (path ?? false) ? this.formatPath(str) : str;
+            const text = path ?? false ? this.formatPath(str) : str;
             console.log(`${colouredTag} ${text}`);
         }
     }
@@ -73,7 +72,7 @@ export class Logger {
     public warn(str: string, tag?: string, path?: boolean): void {
         if (this.log) {
             const colouredTag = chalk.bold.yellow(`[${tag ?? 'WARNING'}]`);
-            const text = (path ?? false) ? this.formatPath(str) : str;
+            const text = path ?? false ? this.formatPath(str) : str;
             console.log(`${colouredTag} ${text}`);
         }
     }
@@ -87,9 +86,8 @@ export class Logger {
     public error(str: string, tag?: string, path?: boolean): void {
         if (this.log) {
             const colouredTag = chalk.bold.red(`[${tag ?? 'ERROR'}]`);
-            const text = (path ?? false) ? this.formatPath(str) : str;
+            const text = path ?? false ? this.formatPath(str) : str;
             console.log(`${colouredTag} ${text}`);
         }
     }
-
 }
