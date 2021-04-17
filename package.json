@@ -1,14 +1,15 @@
 {
   "name": "@eagletrt/eagletrt-code-generator",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Generate dinamically code for the eagletrt telemetry",
-  "main": "dist/source/lib/index.js",
+  "main": "dist/bundled/lib/index.js",
+  "types": "dist/bundled/lib/index.d.ts",
   "bin": {
-    "eagle": "dist/source/bin/index.js"
+    "eagle": "dist/bundled/bin/index.js"
   },
   "files": [
     "package.json",
-    "dist/source",
+    "bundled",
     "README.md",
     "LICENSE"
   ],
@@ -35,7 +36,8 @@
     "docs:html": "typedoc",
     "docs:html-dev": "typedoc --options typedoc.dev.js",
     "docs": "npm run docs:html && npm run docs:html-dev",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "prepublishOnly": "npm run bundle"
   },
   "repository": {
     "type": "git",
