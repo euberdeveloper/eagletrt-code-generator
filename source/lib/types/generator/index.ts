@@ -19,11 +19,10 @@ export interface Code {
  * The class that all generators extends.
  */
 export abstract class Generator {
-
     /**
      * The generated code.
      */
-     protected code = '';
+    protected code = '';
 
     /**
      * The template comment that this generator handles.
@@ -33,7 +32,7 @@ export abstract class Generator {
     /**
      * Returns the generated Code object.
      */
-    public get generated(): Code {
+    get generated(): Code {
         return {
             comment: this.comment,
             code: this.code
@@ -45,8 +44,8 @@ export abstract class Generator {
      * @param structure The structure model: the generated code could depend on it.
      * @param config The config model: the generated code could depend on it.
      */
-    public constructor(protected structure: StructureModel, protected config: ConfigModel) {}
-    
+    constructor(protected structure: StructureModel, protected config: ConfigModel) {}
+
     /**
      * Prints a line of generated code, fomatting it and adding it to the code field.
      * @param str The line to print.
@@ -59,5 +58,7 @@ export abstract class Generator {
      * The function that generates the code and assigns it to the code field.
      */
     protected abstract generate(): void;
-
 }
+
+/** The type of a constructor of a [[Generator]] */
+export type GeneratorConstructor = new (s: StructureModel, c: ConfigModel) => Generator;

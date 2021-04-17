@@ -10,6 +10,6 @@ export type ConfigPrimitiveArray = string[] | number[];
 /**
  * The config model type, defining the content of a config.model.json.
  */
-export type ConfigModel = { 
+export type ConfigModel = {
     [key: string]: ConfigPrimitive | ConfigPrimitiveArray | ConfigModel;
 };

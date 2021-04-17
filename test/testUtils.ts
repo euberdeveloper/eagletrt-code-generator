@@ -9,8 +9,7 @@ export const testConfig = {
 export function getDirToTest(folder: string): string[] {
     return dree
         .scan(path.join(testConfig.assetsPath, folder), { depth: 1 })
-        .children!
-        .filter(c => c.type == dree.Type.DIRECTORY)
+        .children!.filter(c => c.type == dree.Type.DIRECTORY)
         .map(c => c.path);
 }
 
@@ -22,7 +21,7 @@ export function getCorrectFileNameFromTemplate(templateFileName: string): string
     return templateFileName.replace('.template', '.correct');
 }
 
-export function getTemplateFilesPath(): { templateFilePaths: string[]; toTestPaths: string[]} {
+export function getTemplateFilesPath(): { templateFilePaths: string[]; toTestPaths: string[] } {
     const templateFilePaths: string[] = [];
     const toTestPaths = getDirToTest('generate');
     for (const toTestPath of toTestPaths) {
@@ -38,7 +37,12 @@ export function getTemplateFilesPath(): { templateFilePaths: string[]; toTestPat
 
 export function generateEverything(toTestPaths: string[]): void {
     for (const toTestPath of toTestPaths) {
-        generate(path.join(toTestPath, 'templates'), path.join(toTestPath, 'structure.model.json'), path.join(toTestPath, 'config.model.json'), { log: false });
+        generate(
+            path.join(toTestPath, 'templates'),
+            path.join(toTestPath, 'structure.model.json'),
+            path.join(toTestPath, 'config.model.json'),
+            { log: false }
+        );
     }
 }
 
@@ -47,7 +51,7 @@ export function removeCodeFormatting(code: string): string {
         .split('\n')
         .map(l => l.trim())
         .join();
-} 
+}
 
 export interface ReferenceCode {
     almostempty: { [key: string]: string };

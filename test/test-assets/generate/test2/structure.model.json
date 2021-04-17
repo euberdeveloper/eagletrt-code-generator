@@ -7,40 +7,46 @@
             "speed": [
                 {
                     "timestamp": "long",
-                    "value": "int"
-                }, 500
+                    "value": "int",
+                    "maxLength": 500
+                }
             ],
             "temperature_igbt": [
                 {
                     "timestamp": "long",
-                    "value": "int"
-                }, 500
+                    "value": "int",
+                    "maxLength": 500
+                }
             ],
             "temperature_motors": [
                 {
                     "timestamp": "long",
-                    "value": "int"
-                }, 500
+                    "value": "int",
+                    "maxLength": 500
+                }
             ]
         },
         "left": {
             "speed": [
                 {
                     "timestamp": "long",
-                    "value": "int"
-                }, 500
+                    "value": "int",
+                    "maxLength": 500
+                }
             ],
             "temperature_igbt": [
                 {
                     "timestamp": "long",
-                    "value": "int"
-                }, 500
+                    "value": "int",
+                    "maxLength": 500
+                }
             ],
             "temperature_motors": [
                 {
                     "timestamp": "long",
-                    "value": "int"
-                }, 500
+                    "value": "int",
+                    "maxLength": 500
+                }
             ]
         }
     },
@@ -52,9 +58,9 @@
                     "max": "double",
                     "min": "double",
                     "average": "double"
-                }
-            },
-            500
+                },
+                "maxLength": 500
+            }
         ],
         "voltage": [
             {
@@ -63,9 +69,9 @@
                     "max": "double",
                     "min": "double",
                     "total": "double"
-                }
-            },
-            500
+                },
+                "maxLength": 500
+            }
         ],
         "current": [
             {
@@ -73,9 +79,9 @@
                 "value": {
                     "current": "double",
                     "pow": "double"
-                }
-            },
-            500
+                },
+                "maxLength": 500
+            }
         ],
         "errors": [
             {
@@ -83,9 +89,9 @@
                 "value": {
                     "fault_id": "int",
                     "fault_index": "int"
-                }
-            },
-            500
+                },
+                "maxLength": 500
+            }
         ],
         "warnings": [
             {
@@ -93,9 +99,9 @@
                 "value": {
                     "fault_id": "int",
                     "fault_index": "int"
-                }
-            },
-            500
+                },
+                "maxLength": 500
+            }
         ]
     },
     "bms_lv": {
@@ -105,16 +111,16 @@
                 "value": {
                     "voltage": "double",
                     "temperature": "double"
-                }
-            },
-            500
+                },
+                "maxLength": 500
+            }
         ],
         "errors": [
             {
                 "timestamp": "long",
-                "value": "int"
-            },
-            500
+                "value": "int",
+                "maxLength": 500
+            }
         ]
     },
     "gps": {
@@ -123,7 +129,7 @@
                 "timestamp": "long",
                 "value": {
                     "latitude_GGA_safe": "double",
-                    "longitude_GGA_safe": "double", 
+                    "longitude_GGA_safe": "double",
                     "latitude_GGA": "double",
                     "longitude_GGA": "double",
                     "altitude_GGA": "double",
@@ -144,9 +150,10 @@
                     "utc_time_RMC": "char*",
                     "date_RMC": "char*",
                     "ground_speed_knots_RMC": "double"
-                }
-            }, 500
-        ],        
+                },
+                "maxLength": 500
+            }
+        ],
         "old": {
             "location": [
                 {
@@ -158,9 +165,9 @@
                         "longitude_o": "int",
                         "speed": "double",
                         "altitude": "double"
-                    }
-                },
-                500
+                    },
+                    "maxLength": 500
+                }
             ],
             "time": [
                 {
@@ -169,16 +176,16 @@
                         "hours": "int",
                         "minutes": "int",
                         "seconds": "int"
-                    }
-                },
-                500
+                    },
+                    "maxLength": 500
+                }
             ],
             "true_track_mode": [
                 {
                     "timestamp": "long",
-                    "value": "int"
-                },
-                500
+                    "value": "int",
+                    "maxLength": 500
+                }
             ]
         }
     },
@@ -190,9 +197,9 @@
                 "y": "double",
                 "z": "double",
                 "scale": "double"
-            }
-        },
-        500
+            },
+            "maxLength": 500
+        }
     ],
     "imu_accel": [
         {
@@ -202,9 +209,9 @@
                 "y": "double",
                 "z": "double",
                 "scale": "double"
-            }
-        },
-        500
+            },
+            "maxLength": 500
+        }
     ],
     "front_wheels_encoder": [
         {
@@ -212,9 +219,9 @@
             "value": {
                 "speed": "double",
                 "speedms": "double"
-            }
-        },
-        500
+            },
+            "maxLength": 500
+        }
     ],
     "distance": [
         {
@@ -224,31 +231,31 @@
                 "rotations": "double",
                 "angle": "double",
                 "clock_period": "double"
-            }
-        },
-        500
+            },
+            "maxLength": 500
+        }
     ],
     "throttle": [
         {
             "timestamp": "long",
-            "value": "double"
-        },
-        500
+            "value": "double",
+            "maxLength": 500
+        }
     ],
     "brake": [
         {
             "timestamp": "long",
-            "value": "double"
-        },
-        500
+            "value": "double",
+            "maxLength": 500
+        }
     ],
     "steering_wheel": {
         "encoder": [
             {
                 "timestamp": "long",
-                "value": "double"
-            },
-            500
+                "value": "double",
+                "maxLength": 500
+            }
         ],
         "gears": [
             {
@@ -257,9 +264,9 @@
                     "control": "int",
                     "cooling": "int",
                     "map": "int"
-                }
-            },
-            500
+                },
+                "maxLength": 500
+            }
         ],
         "marker": "int"
     }

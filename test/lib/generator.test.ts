@@ -67,11 +67,13 @@ describe('Generator', function () {
                     assert(false, `No reference code for ${gen.comment}`);
                 } else {
                     assert(
-                        removeCodeFormatting(referenceCode.almostempty[gen.comment]) === removeCodeFormatting(gen.code)
-                    ),
-                        `${gen.comment} different from reference (Not considering formatting)`;
-                    assert(referenceCode.almostempty[gen.comment] === gen.code),
-                        `${gen.comment} different from reference formatting`;
+                        removeCodeFormatting(referenceCode.almostempty[gen.comment]) === removeCodeFormatting(gen.code),
+                        `${gen.comment} different from reference (Not considering formatting)`
+                    );
+                    assert(
+                        referenceCode.almostempty[gen.comment] === gen.code,
+                        `${gen.comment} different from reference formatting`
+                    );
                 }
             }
         });
@@ -96,8 +98,10 @@ describe('Generator', function () {
                                     removeCodeFormatting(gen.code),
                                 `${gen.comment} in ${toTestPath} different from reference (Not considering formatting)`
                             );
-                            assert(referenceCode.tests[toTestPath][gen.comment] === gen.code),
-                                `${gen.comment} in ${toTestPath} different from reference formatting`;
+                            assert(
+                                referenceCode.tests[toTestPath][gen.comment] === gen.code,
+                                `${gen.comment} in ${toTestPath} different from reference formatting`
+                            );
                         }
                     }
                 }

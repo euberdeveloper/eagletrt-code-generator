@@ -1,4 +1,4 @@
-import { Code, ConfigModel, Generator, StructureModel } from '../types';
+import { Code, ConfigModel, GeneratorConstructor, StructureModel } from '../types';
 
 /**
  * Given the models and the generators, returns an array of all the comment and associated code couples.
@@ -7,7 +7,11 @@ import { Code, ConfigModel, Generator, StructureModel } from '../types';
  * @param generators The generators classes.
  * @returns Returns an array of Code objects, containing the comment and the associated generated code.
  */
-export function getCodes(structureModel: StructureModel, configModel: ConfigModel, generators: typeof Generator[]): Code[] {
+export function getCodes(
+    structureModel: StructureModel,
+    configModel: ConfigModel,
+    generators: GeneratorConstructor[]
+): Code[] {
     return generators
         .map(generator => new generator(structureModel, configModel))
         .map(generator => generator.generated);
