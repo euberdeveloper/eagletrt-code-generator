@@ -111,7 +111,7 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
 
         const localScope: LocalScope = { tempVars: new Set(), messageVals: new Set() };
 
-        this.print(`case (${messageId}):`);
+        this.print(`case (${messageId}): {`);
         this.indentation++;
 
         this.print(`int count = document${this.propCountName};`);
@@ -140,9 +140,10 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
         this.indentation--;
         this.print('}');
         this.print('break;');
-        this.print('');
 
         this.indentation--;
+        this.print('}');
+        this.print('');
     }
 
     /**
