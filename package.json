@@ -61,7 +61,7 @@
     }
   },
   "devDependencies": {
-    "@euberdeveloper/eslint-plugin": "^1.0.2",
+    "@euberdeveloper/eslint-plugin": "^1.0.3",
     "@types/chai": "^4.2.16",
     "@types/mocha": "^8.2.2",
     "@types/node": "^14.14.41",
@@ -78,7 +78,7 @@
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-mocha": "^8.1.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "glob": "^7.1.4",
+    "glob": "^7.1.6",
     "json-loader": "^0.5.7",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0",
