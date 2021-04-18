@@ -20,10 +20,22 @@ export abstract class StructureGenerator extends Generator {
     protected keys: string[] = [];
 
     /**
+     * The current indentation as number of tabs.
+     */
+    protected indentation = 0;
+
+    /**
      * The parsed structure, with all the [[StructureValueDefinition]] values transformed into a [[StructureValuePrimitive]].
      */
     protected get parsedStructure(): StructureModel {
         return this.parseStructure(this.structure) as StructureModel;
+    }
+
+    /**
+     * The strings of indentation tabs, dependent by the indentation field.
+     */
+    protected get indentationTabs(): string {
+        return Array(this.indentation).fill('\t').join('');
     }
 
     /**
@@ -49,7 +61,7 @@ export abstract class StructureGenerator extends Generator {
     }
 
     /**
-     * Given the current inspected keys, returns the string that in c access that property, adding _size at the end.
+     * Given the current inspected keys, returns the string that in c access that property, adding _size at the end and keeping only the last key.
      */
     protected get sizeName(): string {
         const last = this.keys.length - 1;
@@ -67,12 +79,30 @@ export abstract class StructureGenerator extends Generator {
     }
 
     /**
+     * Given the current inspected keys, returns the string that in c access that property, adding _size at the end.
+     */
+    protected get propSizeName(): string {
+        const last = this.keys.length - 1;
+        return `${this.keys.slice(0, last).reduce((accumulator, current) => (accumulator += `.${current}`), '')}.${
+            this.sizeName
+        }`.replace('.', '->');
+    }
+
+    /**
      * The constructor of the [[StructureGenerator]] class.
      * @param structure The structure model: the generated code will depend on it.
      * @param config The config model: the generated code will not actually depend on it.
      */
     constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
+    }
+
+    /**
+     * Prints the given string to the current cursor, formatting it.
+     * @param str The string to print.
+     */
+    protected print(str: string): void {
+        this.code += `${this.indentationTabs}${str}\n`;
     }
 
     /**

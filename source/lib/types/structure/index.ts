@@ -39,7 +39,7 @@ export interface StructureMessage {
     /** The maximum number of messages in the same document */
     maxLength: number;
     /** The name of the message */
-    message?: string;
+    name?: string;
     /** The network that the message belongs to */
     network?: StructureNetwork;
     /** The definition of temporaneous variables used to extract the message value */
@@ -123,7 +123,7 @@ export function isStructureMessage(data: any): data is StructureMessage {
         typeof data.timestamp === 'string' &&
         typeof data.maxLength === 'string' &&
         (isStructureValue(data.value) || isStructureCompositeValue(data.value)) &&
-        (data.message === undefined || (typeof data.message === 'string' && data.message)) &&
+        (data.name === undefined || (typeof data.name === 'string' && data.name)) &&
         (data.network === undefined || isStructureNetwork(data.network)) &&
         (data.defines === undefined ||
             (typeof data.defines === 'object' &&

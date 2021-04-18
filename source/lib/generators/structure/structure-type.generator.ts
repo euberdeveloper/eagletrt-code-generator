@@ -10,10 +10,6 @@ class StructureTypeGenerator extends StructureGenerator {
      */
     protected comment = '{{GENERATE_STRUCTURE_TYPE}}';
     /**
-     * The current indentation as number of tabs.
-     */
-    private indentation = 0;
-    /**
      * The array of generated structs.
      */
     private readonly structs: string[] = [];
@@ -45,13 +41,6 @@ class StructureTypeGenerator extends StructureGenerator {
      */
     protected get structName(): string {
         return this.keys.length === 1 ? this.keys[0] : `${this.keys.slice(1).join('_')}_data`;
-    }
-
-    /**
-     * The strings of indentation tabs, dependent by the indentation field.
-     */
-    private get indentationTabs(): string {
-        return Array(this.indentation).fill('\t').join('');
     }
 
     /**
