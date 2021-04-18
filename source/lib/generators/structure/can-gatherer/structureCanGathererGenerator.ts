@@ -107,7 +107,7 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
     private parseMessage(message: StructureMessage): void {
         const messageName = message.name as string;
         const messageId = `ID_${messageName}`;
-        const nakedMessageName = `Primary_${messageName}`;
+        const nakedMessageName = `${this.network}_${messageName}`;
 
         const localScope: LocalScope = { tempVars: new Set(), messageVals: new Set() };
 
