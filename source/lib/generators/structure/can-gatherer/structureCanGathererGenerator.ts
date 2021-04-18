@@ -137,6 +137,8 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
             Object.keys(value).forEach(key => this.parseValue(localScope, value[key], key));
         }
 
+        this.print(`++document${this.propCountName};`);
+
         this.indentation--;
         this.print('}');
         this.print('break;');
