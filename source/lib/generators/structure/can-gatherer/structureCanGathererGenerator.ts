@@ -30,37 +30,43 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
      */
     constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
-        this.generate();
     }
 
     /**
      * Parses an expression.
      * @param localScope The local scope with the defined vars.
-     * @param value The value that contains the expression.
+     * @param expression The value that contains the expression.
      * @param valueKey If the expression comes from a composite message value, $value will be an alias for #valueKey
      * @returns The parsed expression.
      */
-    private parseExpression(localScope: LocalScope, value: string, valueKey?: string): string {
+    private parseExpression(localScope: LocalScope, expression: string, valueKey?: string): string {
         const tempVarsRegExp = /(\$[a-zA-Z_][a-zA-Z0-9_]*)/g;
         const messageValsRegExp = /(#[a-zA-Z_][a-zA-Z0-9_]*)/g;
 
-        const tempVars: string[] = (tempVarsRegExp.exec(value) ?? []).map((match: string) => `${match.slice(1)}`);
-        const messageVals: string[] = (messageValsRegExp.exec(value) ?? []).map((match: string) => match.slice(1));
+        const tempVars: string[] = (expression.match(tempVarsRegExp) ?? []).map((match: string) => `${match.slice(1)}`);
+        const messageVals: string[] = (expression.match(messageValsRegExp) ?? []).map((match: string) =>
+            match.slice(1)
+        );
 
-        let parsedExpression = value;
+        let parsedExpression = expression;
+        let specialIdentifier = false;
 
         new Set(tempVars).forEach(tempVar => {
             if (valueKey && tempVar === 'value') {
-                messageVals.push(valueKey);
+                specialIdentifier = true;
             } else if (!localScope.tempVars.has(tempVar)) {
                 throw new Error(`StructureCanGathererGeneratorGenerator Error, unknown reference to var ${tempVar}`);
             } else {
-                parsedExpression = parsedExpression.replace(new RegExp(`\$${tempVar}`, 'g'), tempVar);
+                parsedExpression = parsedExpression.replace(new RegExp(`\\$${tempVar}`, 'g'), tempVar);
             }
         });
         new Set(messageVals).forEach(messageVal => {
             parsedExpression = parsedExpression.replace(new RegExp(`#${messageVal}`, 'g'), `message->${messageVal}`);
         });
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        if (specialIdentifier && valueKey) {
+            parsedExpression = parsedExpression.replace(/\$value/g, `message->${valueKey}`);
+        }
 
         return parsedExpression;
     }
@@ -77,7 +83,7 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
             ? definition
             : { type: definition, value: '$value' };
         const parsedExpression = this.parseExpression(localScope, handledDefinition.value, name);
-        this.print(`${this.propName}[count].value${subKey} = ${parsedExpression};`);
+        this.print(`document${this.propName}[count].value${subKey} = ${parsedExpression};`);
     }
 
     /**
@@ -90,7 +96,7 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
         if (name in localScope.tempVars) {
             throw new Error(`StructureCanGathererGeneratorGenerator Error, $${name} already exists`);
         }
-        this.print(`${definition.type} _${name} = ${this.parseExpression(localScope, definition.value)}`);
+        this.print(`${definition.type} ${name} = ${this.parseExpression(localScope, definition.value)};`);
         localScope.tempVars.add(name);
     }
 
@@ -105,10 +111,24 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
 
         const localScope: LocalScope = { tempVars: new Set(), messageVals: new Set() };
 
+        this.print(`case (${messageId}):`);
+        this.indentation++;
+
+        this.print(`int count = document${this.propCountName};`);
+        this.print(`if (count < document${this.propSizeName}) {`);
+        this.indentation++;
+
+        this.print(`${nakedMessageName}* message = (${nakedMessageName}*) malloc(sizeof(${nakedMessageName}));`);
+        this.print(`deserialize_${nakedMessageName}(data, 8, message);`);
+        this.print('');
+
         const defines = message.defines;
         if (defines) {
             Object.keys(defines).forEach(key => this.parseTempVar(localScope, key, defines[key]));
         }
+
+        this.print('');
+        this.print(`document${this.propName}[count].timestamp = getCurrentTimestamp();`);
 
         const value = message.value;
         if (isStructureValue(value)) {
@@ -117,20 +137,10 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
             Object.keys(value).forEach(key => this.parseValue(localScope, value[key], key));
         }
 
-        this.print(`case (${messageId}):`);
-        this.indentation++;
-
-        this.print(`int count = ${this.propCountName}`);
-        this.print(`if (count < ${this.propSizeName}) {`);
-        this.indentation++;
-
-        this.print(`${nakedMessageName}* message = (${nakedMessageName}*) malloc(sizeof(${nakedMessageName}));`);
-        this.print(`deserialize_${nakedMessageName}(data, 8, message);`);
-        this.print(`${this.propName}[count].timestamp = getCurrentTimestamp();`);
-
         this.indentation--;
         this.print('}');
         this.print('break;');
+        this.print('');
 
         this.indentation--;
     }

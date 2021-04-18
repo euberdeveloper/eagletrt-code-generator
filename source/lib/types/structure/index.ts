@@ -26,7 +26,7 @@ export type StructureCompositeValue = Record<string, StructureValue>;
 /**
  * The possible networks that a [[StructureMessage]] can belong to.
  */
-export type StructureNetwork = 'PRIMARY' | 'SECONDARY';
+export type StructureNetwork = 'Primary' | 'Secondary';
 
 /**
  * The type of the details of a message.
@@ -73,7 +73,7 @@ export type StructureModel = {
  * @returns True if the data is a [[StructureNetwork]].
  */
 export function isStructureNetwork(data: any): data is StructureNetwork {
-    return typeof data === 'string' && ['PRIMARY', 'SECONDARY'].includes(data);
+    return typeof data === 'string' && ['Primary', 'Secondary'].includes(data);
 }
 
 /**

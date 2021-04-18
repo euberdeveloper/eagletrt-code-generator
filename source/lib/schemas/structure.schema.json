@@ -47,8 +47,8 @@
         "network-value": {
             "type": "string",
             "enum": [
-                "PRIMARY",
-                "SECONDARY"
+                "Primary",
+                "Secondary"
             ]
         },
         "id": {
