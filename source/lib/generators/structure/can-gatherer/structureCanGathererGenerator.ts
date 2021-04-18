@@ -41,7 +41,7 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
      * @returns The parsed expression.
      */
     private parseExpression(localScope: LocalScope, value: string, valueKey?: string): string {
-        const tempVarsRegExp = /\($[a-zA-Z_][a-zA-Z0-9_]*)/g;
+        const tempVarsRegExp = /(\$[a-zA-Z_][a-zA-Z0-9_]*)/g;
         const messageValsRegExp = /(#[a-zA-Z_][a-zA-Z0-9_]*)/g;
 
         const tempVars: string[] = (tempVarsRegExp.exec(value) ?? []).map((match: string) => `${match.slice(1)}`);
