@@ -61,7 +61,7 @@
     }
   },
   "devDependencies": {
-    "@euberdeveloper/eslint-plugin": "^1.0.1",
+    "@euberdeveloper/eslint-plugin": "^1.0.2",
     "@types/chai": "^4.2.16",
     "@types/mocha": "^8.2.2",
     "@types/node": "^14.14.41",
