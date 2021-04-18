@@ -1,4 +1,4 @@
-import { ConfigModel, ConfigPrimitive, ConfigPrimitiveArray, StructureModel } from '../../types';
+import { ConfigModel, ConfigPrimitive, ConfigPrimitiveArray, StructureModel } from '@lib/types';
 import { ConfigGenerator } from './configGenerator';
 
 /**

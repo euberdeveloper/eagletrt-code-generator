@@ -1,4 +1,4 @@
-import { ConfigModel, StructureModel, StructureNetwork } from '../../../types';
+import { ConfigModel, StructureModel, StructureNetwork } from '@lib/types';
 import { StructureCanGathererGenerator } from './structureCanGathererGenerator';
 
 /**

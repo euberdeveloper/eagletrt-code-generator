@@ -1,4 +1,4 @@
-import { ConfigModel, StructureModel, StructureNetwork } from '../../../types';
+import { ConfigModel, StructureModel, StructureNetwork } from '@lib/types';
 import { StructureCanGathererGenerator } from './structureCanGathererGenerator';
 
 /**
@@ -18,7 +18,7 @@ class StructureCanGathererSecondaryGenerator extends StructureCanGathererGenerat
      * @param structure The structure model: the generated code will depend on it.
      * @param config The config model: the generated code will not actually depend on it.
      */
-     constructor(structure: StructureModel, config: ConfigModel) {
+    constructor(structure: StructureModel, config: ConfigModel) {
         super(structure, config);
         this.generate();
     }

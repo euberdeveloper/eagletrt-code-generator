@@ -1,6 +1,6 @@
 {
   "name": "@eagletrt/eagletrt-code-generator",
-  "version": "3.1.5",
+  "version": "3.1.6",
   "description": "Generate dinamically code for the eagletrt telemetry",
   "main": "bundled/lib/index.js",
   "types": "bundled/lib/index.d.ts",
@@ -15,12 +15,10 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist bundled",
-    "pretranspile:test": "npm run clean",
-    "transpile:test": "tsc --project test",
     "pretranspile:source": "npm run clean",
     "transpile:source": "tsc --project source",
     "pretranspile": "npm run clean",
-    "transpile": "npm run transpile:source && npm run transpile:test",
+    "transpile": "tsc",
     "prebundle": "npm run clean",
     "bundle": "IS_WEBPACK=true webpack",
     "lint:source": "eslint source/**/*.ts --format codeframe",
@@ -29,8 +27,8 @@
     "lint:test:fix": "eslint --fix test/**/*.ts --format codeframe",
     "lint": "npm run lint:source && npm run lint:test",
     "lint:fix": "npm run lint:source:fix && npm run lint:test:fix",
-    "test:generate-reference": "node ./dist/test/test/generateReferenceFiles",
-    "test": "mocha ./dist/test/test/**/*.test.js --reporter spec",
+    "test:generate-reference": "node ./dist/test/generateReferenceFiles",
+    "test": "mocha ./dist/test/index.test.js --reporter spec",
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov -x \"source/test\" npm run test",
     "cover": "nyc report --extension=ts --reporter=text-lcov | coveralls",
     "docs:html": "typedoc",
@@ -64,6 +62,7 @@
     "@euberdeveloper/eslint-plugin": "^1.0.3",
     "@types/chai": "^4.2.16",
     "@types/mocha": "^8.2.2",
+    "@types/module-alias": "^2.0.0",
     "@types/node": "^14.14.41",
     "@types/rewire": "^2.5.28",
     "@types/yargs": "^16.0.1",
@@ -81,14 +80,17 @@
     "glob": "^7.1.6",
     "json-loader": "^0.5.7",
     "mocha": "^8.3.2",
+    "module-alias": "^2.2.2",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
     "rewire": "^5.0.0",
     "shebang-loader": "^0.0.1",
     "shx": "^0.3.3",
     "ts-loader": "^8.1.0",
+    "ttypescript": "^1.5.12",
     "typedoc": "^0.20.35",
     "typescript": "^4.2.4",
+    "typescript-transform-paths": "^2.2.3",
     "webpack": "^5.33.2",
     "webpack-cli": "^4.6.0",
     "webpack-node-externals": "^2.5.2"
@@ -98,5 +100,11 @@
     "chalk": "^4.1.0",
     "dree": "^2.6.1",
     "yargs": "^16.2.0"
+  },
+  "_moduleAliases": {
+    "@": "dist",
+    "@lib": "dist/source/lib",
+    "@bin": "dist/source/bin",
+    "@test": "dist/test"
   }
 }

@@ -1,4 +1,4 @@
-import { ConfigModel, StructureMessagesGroup, StructureModel } from '../../types';
+import { ConfigModel, StructureMessagesGroup, StructureModel } from '@lib/types';
 import { StructureGenerator } from './structureGenerator';
 
 /**

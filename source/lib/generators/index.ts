@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { scan } from 'dree';
-import { GeneratorConstructor } from '../types';
-import { Logger } from '../utils/logger';
+import { GeneratorConstructor } from '@lib/types';
+import { Logger } from '@lib/utils/logger';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 declare const __non_webpack_require__: any;

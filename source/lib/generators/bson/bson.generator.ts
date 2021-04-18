@@ -10,7 +10,7 @@ import {
     StructureMessagesGroup,
     StructureModel,
     StructureValue
-} from '../../types';
+} from '@lib/types';
 
 /**
  * The type describing a key, which has the key string and its type that can be an array (such as [0]) or object  (such as .key).

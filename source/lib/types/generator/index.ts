@@ -1,5 +1,5 @@
-import { ConfigModel } from '../config';
-import { StructureModel } from '../structure';
+import { ConfigModel } from '@lib/types/config';
+import { StructureModel } from '@lib/types/structure';
 
 /**
  * The interface of the objects containing the template comment and the associated generated code.

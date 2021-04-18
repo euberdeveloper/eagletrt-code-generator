@@ -2,7 +2,7 @@
     "compilerOptions": {
         "moduleResolution": "node",
         "module": "commonjs",
-        "target": "es5",
+        "target": "ES5",
         "lib": ["ES2020"],
         "resolveJsonModule": true,
         "strictNullChecks": true,
@@ -14,27 +14,25 @@
                 "./*"
             ],
             "@lib/*": [
-                "./lib/*"
+                "./source/lib/*"
             ],
             "@bin/*": [
-                "./bin/*"
+                "./source/bin/*"
+            ],
+            "@test/*": [
+                "./test/*"
             ],
             "@lib": [
-                "./lib"
+                "./source/lib"
             ],
             "@bin": [
-                "./bin"
+                "./source/bin"
+            ],
+            "@test": [
+                "./test"
             ]
         },
-        "plugins": [
-            {
-                "transform": "typescript-transform-paths"
-            },
-            {
-                "transform": "typescript-transform-paths",
-                "afterDeclarations": true
-            }
-        ],
-        "outDir": "../dist/source"
-    }
+        "outDir": "./dist",
+    },
+    "include": ["source", "test"]
 }

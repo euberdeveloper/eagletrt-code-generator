@@ -24,7 +24,10 @@ const generatorsConfig = {
                 test: /\.ts$/,
                 use: [
                     {
-                        loader: 'ts-loader'
+                        loader: 'ts-loader',
+                        options: {
+                            compiler: 'ttypescript'
+                        }
                     }
                 ]
             }
@@ -57,7 +60,10 @@ const libConfig = {
                 test: /\.ts$/,
                 use: [
                     {
-                        loader: 'ts-loader'
+                        loader: 'ts-loader',
+                        options: {
+                            compiler: 'ttypescript'
+                        }
                     }
                 ]
             }
@@ -98,7 +104,10 @@ const binConfig = {
                 test: /\.ts$/,
                 use: [
                     {
-                        loader: 'ts-loader'
+                        loader: 'ts-loader',
+                        options: {
+                            compiler: 'ttypescript'
+                        }
                     },
                     {
                         loader: 'shebang-loader'

@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 import * as yargs from 'yargs';
-import { generate, Options } from '../lib/index';
+
+if (!process.env.IS_WEBPACK) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require('module-alias/register');
+}
+
+import { generate, Options } from '@lib';
 
 yargs
     .scriptName('eagle')

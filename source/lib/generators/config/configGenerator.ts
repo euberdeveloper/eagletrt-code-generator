@@ -1,4 +1,4 @@
-import { ConfigModel, ConfigPrimitive, Generator, StructureModel } from '../../types';
+import { ConfigModel, ConfigPrimitive, Generator, StructureModel } from '@lib/types';
 
 /**
  * The ConfigGenerator class, extending the Generator class and giving a blueprint for all the generators regarding the config.

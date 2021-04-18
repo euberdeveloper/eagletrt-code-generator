@@ -1,9 +1,21 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { generateEverything, getTemplateFilesPath, getCorrectFileNameFromTemplate, getFileNameFromTemplate, ReferenceCode, testConfig } from './testUtils';
-import { Logger } from '../source/lib/utils/logger';
-import getGenerators from '../source/lib/generators';
+if (!process.env.IS_WEBPACK) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require('module-alias/register');
+}
+
+import {
+    generateEverything,
+    getTemplateFilesPath,
+    getCorrectFileNameFromTemplate,
+    getFileNameFromTemplate,
+    ReferenceCode,
+    testConfig
+} from './testUtils';
+import { Logger } from '@lib/utils/logger';
+import getGenerators from '@lib/generators';
 
 const paths = getTemplateFilesPath();
 generateEverything(paths.toTestPaths);
@@ -18,7 +30,7 @@ const referenceCode: ReferenceCode = {
 
 const generators = getGenerators(new Logger({ log: false }));
 for (const generator of generators) {
-    const generatedEmpty = new generator({id: 'int', sessionName: 'char*', timestamp: 'long'} as any, {}).generated;
+    const generatedEmpty = new generator({ id: 'int', sessionName: 'char*', timestamp: 'long' } as any, {}).generated;
     referenceCode.almostempty[generatedEmpty.comment] = generatedEmpty.code;
 }
 

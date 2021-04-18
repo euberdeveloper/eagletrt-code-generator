@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { scan, ScanOptions } from 'dree';
 
-import { Options, Code } from '../types';
+import { Options, Code } from '@lib/types';
 import { parseTemplate } from './parseTemplate';
 import { Logger } from './logger';
 

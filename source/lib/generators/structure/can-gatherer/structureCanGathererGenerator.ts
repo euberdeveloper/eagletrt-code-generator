@@ -8,7 +8,7 @@ import {
     StructureNetwork,
     StructureValue,
     StructureValueDefinition
-} from '../../../types';
+} from '@lib/types';
 import { StructureGenerator } from '../structureGenerator';
 
 interface LocalScope {

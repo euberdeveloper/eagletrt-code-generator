@@ -1,9 +1,9 @@
 import Ajv from 'ajv';
 import { readFileSync } from 'fs';
 
-import * as structureSchema from '../schemas/structure.schema.json';
-import * as configSchema from '../schemas/config.schema.json';
-import { ConfigModel, StructureModel } from '../types';
+import * as structureSchema from '@lib/schemas/structure.schema.json';
+import * as configSchema from '@lib/schemas/config.schema.json';
+import { ConfigModel, StructureModel } from '@lib/types';
 
 /**
  * Parses the structure.model.json and config.model.json given their paths. Checks them against their json-schema and throws an error if they does not match.
@@ -23,12 +23,10 @@ export function checkModelsSchema(
     ajv.addSchema(structureSchema, 'structure-schema');
     ajv.addSchema(configSchema, 'config-schema');
 
-    //TODO: fix eslint error
-    // if (!ajv.validate('structure-schema', structureModelObject)) {
-    if (!(ajv.validate('structure-schema', structureModelObject) as boolean)) {
+    if (!ajv.validate('structure-schema', structureModelObject)) {
         throw new Error('eagletrt-code-generator error: invalid structure model');
     }
-    if (!(ajv.validate('config-schema', configModelObject) as boolean)) {
+    if (!ajv.validate('config-schema', configModelObject)) {
         throw new Error('eagletrt-code-generator error: invalid config model');
     }
 

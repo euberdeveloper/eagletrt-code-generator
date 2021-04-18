@@ -8,7 +8,7 @@ import {
     StructureModel,
     StructureValue,
     StructureValuePrimitive
-} from '../../types';
+} from '@lib/types';
 
 /**
  * The StructureGenerator class, extending the Generator class and giving a blueprint for all the generators regarding the data structure.

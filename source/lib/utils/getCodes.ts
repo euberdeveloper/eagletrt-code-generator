@@ -1,4 +1,4 @@
-import { Code, ConfigModel, GeneratorConstructor, StructureModel } from '../types';
+import { Code, ConfigModel, GeneratorConstructor, StructureModel } from '@lib/types';
 
 /**
  * Given the models and the generators, returns an array of all the comment and associated code couples.

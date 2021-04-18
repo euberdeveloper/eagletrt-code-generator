@@ -1,5 +1,5 @@
 import * as chalk from 'chalk';
-import { Options } from '../types';
+import { Options } from '@lib/types';
 
 /**
  * The logger class, used in the package to format the logs.

@@ -1,6 +1,7 @@
 import * as dree from 'dree';
 import * as path from 'path';
-import { generate } from '../source/lib/index';
+
+import { generate } from '@lib/index';
 
 export const testConfig = {
     assetsPath: path.join(process.cwd(), 'test', 'test-assets')

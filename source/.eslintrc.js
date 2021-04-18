@@ -8,5 +8,8 @@ module.exports = {
     extends: [
         'plugin:@euberdeveloper/typescript',
         'plugin:@euberdeveloper/prettier'
-    ]
+    ],
+    rules: {
+        '@typescript-eslint/no-unnecessary-type-assertion': 'off'
+    }
 };

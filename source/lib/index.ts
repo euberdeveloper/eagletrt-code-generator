@@ -1,14 +1,19 @@
 import * as path from 'path';
 
-import { Options } from './types';
-import { Logger } from './utils/logger';
-import { checkModelsSchema } from './utils/checkModelsSchema';
-import { mergeOptions } from './utils/options';
-import { getCodes } from './utils/getCodes';
-import { transpile } from './utils/transpile';
-import getGenerators from './generators';
+if (!process.env.IS_WEBPACK) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require('module-alias/register');
+}
 
-export { Options } from './types';
+import { Options } from '@lib/types';
+import { Logger } from '@lib/utils/logger';
+import { checkModelsSchema } from '@lib/utils/checkModelsSchema';
+import { mergeOptions } from '@lib/utils/options';
+import { getCodes } from '@lib/utils/getCodes';
+import { transpile } from '@lib/utils/transpile';
+import getGenerators from '@lib/generators';
+
+export { Options } from '@lib/types';
 
 /**
  * Fetches all the template files in the given folder (files whose extension is preceded

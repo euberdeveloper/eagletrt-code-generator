@@ -1,4 +1,4 @@
-import { Options, Code } from '../types';
+import { Options, Code } from '@lib/types';
 
 /**
  * Given the row containing the template comment and a block of generated code, returns the block properly indented in relation with the indentation of the template comment.

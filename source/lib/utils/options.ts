@@ -1,4 +1,4 @@
-import { Options } from '../types';
+import { Options } from '@lib/types';
 
 /**
  * The default options, merged with the given options to assign the value to the not-specified properties.
