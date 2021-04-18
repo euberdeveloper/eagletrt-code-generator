@@ -91,7 +91,7 @@ export function isStructureValuePrimitive(data: any): data is StructureValuePrim
  * @returns True if the data is a [[StructureValueDefinition]].
  */
 export function isStructureValueDefinition(data: any): data is StructureValueDefinition {
-    return typeof data === 'object' && typeof data.type === 'string' && isStructureValuePrimitive(data.value);
+    return typeof data === 'object' && typeof data.value === 'string' && isStructureValuePrimitive(data.type);
 }
 
 /**
