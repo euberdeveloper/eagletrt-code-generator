@@ -1,0 +1,631 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>eagletrt-code-generator - v3.1.6</title>
+	<meta name="description" content="Documentation for eagletrt-code-generator - v3.1.6">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">eagletrt-code-generator - v3.1.6</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>eagletrt-code-generator - v3.1.6</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="https://github.com/eagletrt/eagletrt-code-generator/workflows/Lint/badge.svg" alt="Lint">
+					<img src="https://github.com/eagletrt/eagletrt-code-generator/workflows/Build/badge.svg" alt="Build">
+					<img src="https://github.com/eagletrt/eagletrt-code-generator/workflows/Test/badge.svg" alt="Test">
+					<a href="https://coveralls.io/github/eagletrt/eagletrt-code-generator?branch=master"><img src="https://coveralls.io/repos/github/eagletrt/eagletrt-code-generator/badge.svg?branch=master" alt="Coverage Status"></a>
+					<a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly"></a>
+					<a href="https://david-dm.org/eagletrt/eagletrt-code-generator"><img src="https://david-dm.org/eagletrt/eagletrt-code-generator/status.svg" alt="dependencies Status"></a>
+					<a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/eagletrt-code-generator.svg" alt="License"></a>
+				<a href="https://www.npmjs.com/package/eagletrt-code-generator"><img src="https://img.shields.io/npm/types/eagletrt-code-generator.svg" alt="Types"></a></p>
+				<a href="#eagletrt-code-generator" id="eagletrt-code-generator" style="color: inherit; text-decoration: none;">
+					<h1>eagletrt-code-generator</h1>
+				</a>
+				<p>Generate dinamically code for the <a href="https://www.github.com/eagletrt">@eagletrt</a> telemetry</p>
+				<a href="#project-purpose" id="project-purpose" style="color: inherit; text-decoration: none;">
+					<h2>Project purpose</h2>
+				</a>
+				<p>This project is an <strong>npm</strong> package made for the <strong>telemetry</strong> of eagletrt. The telemetry consists in a <strong>c program</strong> located in a <strong>Raspberry Pi</strong> and attached to the canbus of the car and to a rover-gps. Its job is reading all the sensors <strong>messages</strong>, forwarding them via mqtt and saving them in a local mongodb database. In particular, all messages are <strong>accumulated</strong> in a <strong>structure</strong> for some hundreds of milliseconds, the structure is parsed to <strong>bson</strong> and then it is sent via mqtt and saved in the database. After that the process starts again. The problem is that c is a <strong>statically typed</strong> programming language while the structure of the saved data <strong>changes very frequently</strong> and is quite <strong>articulated</strong>. Changing the c struct and the bson parser every time that the structure was modified was a <strong>hell</strong>. Hence this project was made. I started thinking that there exist some <strong>dynamically typed</strong> languages, such as <strong>typescript</strong>. The structure of the saved data is now represented in a <strong>json</strong> file and there is this <strong>nodejs</strong> module that reads that json file and <strong>generates the c code that depends on it</strong>. So now <strong>we just need to change that json file and execute this module, saving hours of time</strong>. In the second version, this method has been applied to the <strong>config parser</strong> as well.</p>
+				<a href="#how-it-was-made" id="how-it-was-made" style="color: inherit; text-decoration: none;">
+					<h2>How it was made</h2>
+				</a>
+				<p>This project was made with <strong>typescript</strong> and consists in an npm module that can be used also <strong>globally</strong>, as a terminal command. It is linted with <strong>eslint</strong>, tested with <strong>mocha</strong> and every time there is a push on github, it is checked by <strong>travis.ci</strong>.</p>
+				<a href="#how-does-it-work" id="how-does-it-work" style="color: inherit; text-decoration: none;">
+					<h2>How does it work</h2>
+				</a>
+				<p>The library gets as inputs a <strong>src</strong> folder, a <strong>structure.model.json</strong> file and a <strong>config.model.json</strong> file. Then it reads the json files, whose content will <strong>determine the generated code</strong>, fetch all the files in the src folder whose extension is preceded by <strong>.template</strong> (example: <code>main.template.c</code>), search for some <strong>special comments</strong> in the code (such as <code>// {{GENERATE_BSON}}</code>) and <strong>create</strong> a file without the .template extension with the right <strong>generated code instead of the comment</strong>.</p>
+				<p>The part of the code that will be probably changed more frequently is the part where the <strong>code is generated</strong>. It resides in the <code>source/generators</code> folder. All files with extension <strong>.generator.ts</strong> contain a class that extends the <strong>Generator class</strong>: they have a <strong>generate</strong> method that generates the code in base of the structure.json and a <strong>comment field</strong>, which is the comment string where the generated code will be put. To <strong>add a new generator</strong>, it is only needed to add a new file ending with <strong>.generator.ts</strong> containing a class extending <strong>Generator</strong> and properly implemented. All the rest of the code will remain unchanged.</p>
+				<a href="#how-to-use-it" id="how-to-use-it" style="color: inherit; text-decoration: none;">
+					<h2>How to use it</h2>
+				</a>
+				<p>This module can be actually used both as a <strong>local</strong> and as a <strong>global</strong> npm module.</p>
+				<a href="#as-a-local-module" id="as-a-local-module" style="color: inherit; text-decoration: none;">
+					<h3>As a local module</h3>
+				</a>
+				<p>Install the module executing:</p>
+				<pre><code class="language-bash"><span style="color: #000000">$ npm install --save eagletrt-code-generator</span>
+</code></pre>
+				<p>Running this script:</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">generator</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;eagletrt-code-generator&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">src</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;./code&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">structureModel</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;./code/structure.model.json&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">configModel</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;./code/config.model.json&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">options</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #001080">extensions:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;c&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;h&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;cpp&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;hpp&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">    </span><span style="color: #001080">log:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">};</span>
+
+<span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #795E26">generate</span><span style="color: #000000">(</span><span style="color: #001080">src</span><span style="color: #000000">, </span><span style="color: #001080">structureModel</span><span style="color: #000000">, </span><span style="color: #001080">configModel</span><span style="color: #000000">, </span><span style="color: #001080">options</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>Given a directory tree such as:</p>
+				<pre><code><span style="color: #001080">code</span><span style="color: #000000">/</span>
+<span style="color: #000000">    </span><span style="color: #001080">structure</span><span style="color: #000000">/</span>
+<span style="color: #000000">        </span><span style="color: #001080">structure</span><span style="color: #000000">.</span><span style="color: #001080">template</span><span style="color: #000000">.</span><span style="color: #001080">h</span>
+<span style="color: #000000">        </span><span style="color: #001080">structure</span><span style="color: #000000">.</span><span style="color: #001080">c</span>
+<span style="color: #000000">    </span><span style="color: #001080">utils</span><span style="color: #000000">/</span>
+<span style="color: #000000">        </span><span style="color: #001080">utils</span><span style="color: #000000">.</span><span style="color: #001080">h</span>
+<span style="color: #000000">        </span><span style="color: #001080">utils</span><span style="color: #000000">.</span><span style="color: #001080">template</span><span style="color: #000000">.</span><span style="color: #001080">c</span>
+<span style="color: #000000">    </span><span style="color: #001080">main</span><span style="color: #000000">.</span><span style="color: #001080">template</span><span style="color: #000000">.</span><span style="color: #001080">c</span>
+</code></pre>
+				<p>The result will be:</p>
+				<pre><code><span style="color: #001080">code</span><span style="color: #000000">/</span>
+<span style="color: #000000">    </span><span style="color: #001080">structure</span><span style="color: #000000">/</span>
+<span style="color: #000000">        </span><span style="color: #001080">structure</span><span style="color: #000000">.</span><span style="color: #001080">template</span><span style="color: #000000">.</span><span style="color: #001080">h</span>
+<span style="color: #000000">        </span><span style="color: #001080">structure</span><span style="color: #000000">.</span><span style="color: #001080">h</span>
+<span style="color: #000000">        </span><span style="color: #001080">structure</span><span style="color: #000000">.</span><span style="color: #001080">c</span>
+<span style="color: #000000">    </span><span style="color: #001080">utils</span><span style="color: #000000">/</span>
+<span style="color: #000000">        </span><span style="color: #001080">utils</span><span style="color: #000000">.</span><span style="color: #001080">h</span>
+<span style="color: #000000">        </span><span style="color: #001080">utils</span><span style="color: #000000">.</span><span style="color: #001080">template</span><span style="color: #000000">.</span><span style="color: #001080">c</span>
+<span style="color: #000000">        </span><span style="color: #001080">utils</span><span style="color: #000000">.</span><span style="color: #001080">c</span>
+<span style="color: #000000">    </span><span style="color: #001080">main</span><span style="color: #000000">.</span><span style="color: #001080">template</span><span style="color: #000000">.</span><span style="color: #001080">c</span>
+<span style="color: #000000">    </span><span style="color: #001080">main</span><span style="color: #000000">.</span><span style="color: #001080">c</span>
+</code></pre>
+				<p>To see all the options, refer to the <strong>api</strong>.</p>
+				<a href="#as-a-global-module" id="as-a-global-module" style="color: inherit; text-decoration: none;">
+					<h3>As a global module</h3>
+				</a>
+				<p>Install the module with:</p>
+				<pre><code class="language-bash"><span style="color: #000000">$ npm install -g eagletrt-code-generator</span>
+</code></pre>
+				<p>Executing:</p>
+				<pre><code class="language-bash"><span style="color: #000000">$ eagle generate --src code --structure-model ./code/structure.model.json --config-model ./code/config.model.json --extensions c h</span>
+</code></pre>
+				<p>Will have the same result as the example with the local module.</p>
+				<p>The options are almost the same as in the <strong>api</strong> of the local module. To see all the cli options, run:</p>
+				<pre><code class="language-bash"><span style="color: #000000">$ eagle generate --help</span>
+</code></pre>
+				<a href="#the-structure-model-file" id="the-structure-model-file" style="color: inherit; text-decoration: none;">
+					<h2>The structure model file</h2>
+				</a>
+				<p>The structure model file is a <strong>json</strong> file that <strong>represents how will be saved the data</strong> in mongodb.</p>
+				<p>Every message is an object containing the <strong>timestamp</strong> of the message and its <strong>value</strong>. If a message contains more than a value, the value property will be <strong>a nested object</strong>.</p>
+				<p>The structure consists in <strong>a few primitive properties</strong> and all the <strong>message objects</strong>, that can be <strong>nested and grouped in other objects</strong> and are always <strong>inside an array</strong>.</p>
+				<p>The arrays contain the message object as the first element, and the maximum dimension of the dynamically allocated array of messages.</p>
+				<p>An example of structure could be this:</p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;int&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;long&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;sessionName&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;char*&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;throttle&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;long&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;double&quot;</span>
+<span style="color: #000000">        }, </span><span style="color: #098658">200</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;brake&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;long&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;double&quot;</span>
+<span style="color: #000000">        }, </span><span style="color: #098658">200</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;bms_hv&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;temperature&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;long&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;max&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;double&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;min&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;double&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;average&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;double&quot;</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            }, </span><span style="color: #098658">500</span>
+<span style="color: #000000">        ],</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;voltage&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;long&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;max&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;double&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;min&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;double&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;total&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;double&quot;</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            }, </span><span style="color: #098658">500</span>
+<span style="color: #000000">        ]</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>A javascript instance of that structure could be:</p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #098658">23</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400000</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;sessionName&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2020_04_23__12_00_00__pilot_race&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;throttle&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400001</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400002</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: </span><span style="color: #098658">5</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400003</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: </span><span style="color: #098658">6</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;brake&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">         {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400001</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: </span><span style="color: #098658">0</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        {</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400004</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: </span><span style="color: #098658">100</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">    ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;bms_hv&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;temperature&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400000</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;max&quot;</span><span style="color: #000000">: </span><span style="color: #098658">28</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;min&quot;</span><span style="color: #000000">: </span><span style="color: #098658">22</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;average&quot;</span><span style="color: #000000">: </span><span style="color: #098658">25</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            }</span>
+<span style="color: #000000">        ],</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;voltage&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400000</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;max&quot;</span><span style="color: #000000">: </span><span style="color: #098658">312</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;min&quot;</span><span style="color: #000000">: </span><span style="color: #098658">200</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;total&quot;</span><span style="color: #000000">: </span><span style="color: #098658">250</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            },</span>
+<span style="color: #000000">            {</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;timestamp&quot;</span><span style="color: #000000">: </span><span style="color: #098658">10483862400007</span><span style="color: #000000">,</span>
+<span style="color: #000000">                </span><span style="color: #0451A5">&quot;value&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;max&quot;</span><span style="color: #000000">: </span><span style="color: #098658">312</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;min&quot;</span><span style="color: #000000">: </span><span style="color: #098658">200</span><span style="color: #000000">,</span>
+<span style="color: #000000">                    </span><span style="color: #0451A5">&quot;total&quot;</span><span style="color: #000000">: </span><span style="color: #098658">250</span>
+<span style="color: #000000">                }</span>
+<span style="color: #000000">            }</span>
+<span style="color: #000000">        ]</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>Where every array contains all the messages of a certain type, arrived in x milliseconds.</p>
+				<p>The passed structure.model.json is checked with <strong><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/source/lib/schemas/structure.schema.json">this json schema</a></strong>.</p>
+				<a href="#the-config-model-file" id="the-config-model-file" style="color: inherit; text-decoration: none;">
+					<h2>The config model file</h2>
+				</a>
+				<p>The config model file is a <strong>json</strong> file that <strong>represents how will be the json config</strong> of the telemetry.</p>
+				<p>This model has the purpose of declaring the possible options, that can be nested objects, arrays or primitive values. It declares also the <strong>default</strong> value if that option will not be specified by the configuration file.</p>
+				<p>It is an object that can contain:</p>
+				<ul>
+					<li><code>string</code> or <code>number</code> as primitive default values.</li>
+					<li>Arrays of <code>string</code> or <code>number</code> as default array values. These arrays <strong>have to be homogeneus</strong> and there can be arrays of strings, integers (no decimal part) or floating point (no integer accepted). Thet have to have at least one default value so that the generator can understand its C type.</li>
+					<li>Nested objects satisfying the two previous constraints in order to group related options together.</li>
+				</ul>
+				<p>An example of config could be this:</p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;can_interface&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;can0&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;rate&quot;</span><span style="color: #000000">: </span><span style="color: #098658">500</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;inc&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1.5</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;pilots&quot;</span><span style="color: #000000">: [ </span><span style="color: #A31515">&quot;default&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;Ivan&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;Davide&quot;</span><span style="color: #000000"> ],</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;mqtt&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;hostname&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;localhost&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;port&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1883</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;topic&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;telemetria&quot;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>A config.json satisfying that model could be:</p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;can_interface&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;vcan0&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;rate&quot;</span><span style="color: #000000">: </span><span style="color: #098658">250</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;mqtt&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;topic&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;test&quot;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>Where the three specified values will override the default values specified in the config.model.json.</p>
+				<p>The passed config.model.json is checked with <strong><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/source/lib/schemas/config.schema.json">this json schema</a></strong>.</p>
+				<a href="#the-generators" id="the-generators" style="color: inherit; text-decoration: none;">
+					<h2>The generators</h2>
+				</a>
+				<p>The generators are the <strong>typescript classes</strong> that replace a certain <strong>special comment</strong> with the <strong>generated code</strong>.</p>
+				<a href="#bsongenerator" id="bsongenerator" style="color: inherit; text-decoration: none;">
+					<h3>bson.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_BSON}}</td>
+							<td>Generates the code of the function that given the structure variable, creates the bson object</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_bson.template.c">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_bson.c">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#structure-typegenerator" id="structure-typegenerator" style="color: inherit; text-decoration: none;">
+					<h3>structure-type.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_STRUCTURE_TYPE}}</td>
+							<td>Generates the c struct representing the structure</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_type.template.h">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_type.h">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#structure-allocatorgenerator" id="structure-allocatorgenerator" style="color: inherit; text-decoration: none;">
+					<h3>structure-allocator.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_STRUCTURE_ALLOCATOR}}</td>
+							<td>Generates the code of the function that allocates the structure</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_allocator.template.c">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_allocator.c">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#structure-deallocatorgenerator" id="structure-deallocatorgenerator" style="color: inherit; text-decoration: none;">
+					<h3>structure-deallocator.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_STRUCTURE_DEALLOCATOR}}</td>
+							<td>Generates the code of the function that deallocates the structure</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_deallocator.template.c">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/structure_service/structure_deallocator.c">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#config-typegenerator" id="config-typegenerator" style="color: inherit; text-decoration: none;">
+					<h3>config-type.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_CONFIG_TYPE}}</td>
+							<td>Generates the c struct representing the config</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_type.template.h">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_type.h">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#config-allocatorgenerator" id="config-allocatorgenerator" style="color: inherit; text-decoration: none;">
+					<h3>config-allocator.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_CONFIG_ALLOCATOR}}</td>
+							<td>Generates the code of the function that allocates the config struct instance</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_allocator.template.c">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_allocator.c">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#config-deallocatorgenerator" id="config-deallocatorgenerator" style="color: inherit; text-decoration: none;">
+					<h3>config-deallocator.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_CONFIG_DEALLOCATOR}}</td>
+							<td>Generates the code of the function that deallocates the config struct instance</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_deallocator.template.c">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_deallocator.c">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#config-printgenerator" id="config-printgenerator" style="color: inherit; text-decoration: none;">
+					<h3>config-print.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_CONFIG_PRINT}}</td>
+							<td>Generates the code of the function that prints the config struct instance</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_print.template.c">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_print.c">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#config-parsergenerator" id="config-parsergenerator" style="color: inherit; text-decoration: none;">
+					<h3>config-parser.generator</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Comment</th>
+							<th>Description</th>
+							<th>template example</th>
+							<th>compiled example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>{{GENERATE_CONFIG_PARSER}}</td>
+							<td>Generates the code of the functions that parses the given json file and assigns it to the config struct instance</td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_parser.template.c">link</a></td>
+							<td><a href="https://github.com/eagletrt/eagletrt-code-generator/blob/master/docs/example/config_service/config_parser.c">link</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+					<h2>API</h2>
+				</a>
+				<p>Using <strong>typedoc</strong>, the documentation is published with <strong>vercel</strong> at <a href="https://eagletrt-code-generator.eagletrt.vercel.sh">https://eagletrt-code-generator.eagletrt.vercel.sh</a>.</p>
+				<p>The documentation for the mantainers is published with <strong>vercel</strong> at <a href="https://eagletrt-code-generator-dev.eagletrt.vercel.sh">https://eagletrt-code-generator-dev.eagletrt.vercel.sh</a>.</p>
+				<a href="#generate" id="generate" style="color: inherit; text-decoration: none;">
+					<h3>generate</h3>
+				</a>
+				<p><strong>Syntax:</strong></p>
+				<p><code>generate(src, structure, options)</code></p>
+				<p><strong>Description:</strong></p>
+				<p>Fetches all the template files in the given folder (files whose extension is preceded by .template) and generate the code inside the special comments (such as <code>//{{COMMENT}}</code>)</p>
+				<p><strong>Parameters:</strong></p>
+				<ul>
+					<li><strong>src</strong>: Optional. The folder where the template files will be fetched from. The default is the current folder.</li>
+					<li><strong>structureModel</strong>: Optional. The path to the json file containing the structure model, used by generators to dynamically generate code about the data structure. The default is <code>structure.model.json</code>.</li>
+					<li><strong>configModel</strong>: Optional. The path to the json file containing the config model, used by generators to dynamically generate code about the config parser. The default is <code>config.model.json</code>.</li>
+					<li><strong>options</strong>: Optional. The options <code>object</code> specifying things such as logging, indentation and filters on the files</li>
+				</ul>
+				<p><strong>Options parameters:</strong></p>
+				<ul>
+					<li><strong>exclude</strong>: Default value: <code>/node_modules/</code>. A <code>RegExp</code> or an <code>array of RegExp</code> whose matching paths will be ignored.</li>
+					<li><strong>extensions</strong>: Default value: <code>undefined</code>. An <code>array of strings</code> representing the extensions that will be considered. By default all extensions will be considered.</li>
+					<li><strong>log</strong>: Default value: <code>true</code>. If the log will be shown on the terminal.</li>
+					<li><strong>indent</strong>: Default value: <code>true</code>. If the generated code will be indented the same as the comment it will substitute.</li>
+				</ul>
+				<a href="#where-was-it-used" id="where-was-it-used" style="color: inherit; text-decoration: none;">
+					<h2>Where was it used</h2>
+				</a>
+				<p>This module was used in the telemetry sender <a href="https://github.com/eagletrt/fenice-telemetria-sender">repo</a> of eagletrt.</p>
+				<p align="center">
+					<img src="https://github.com/eagletrt/eagletrt-code-generator/raw/master/docs/videos/demo.gif">
+				</p>
+				<a href="#test" id="test" style="color: inherit; text-decoration: none;">
+					<h2>Test</h2>
+				</a>
+				<p>The tests were made by <strong><a href="https://github.com/NicolaToscan">Nicola Toscan</a></strong> with <strong>mocha</strong> and <strong>typescript</strong>.</p>
+				<p>To run the tests execute:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm run transpile:test</span>
+<span style="color: #000000">npm </span><span style="color: #795E26">test</span>
+</code></pre>
+				<a href="#changelog" id="changelog" style="color: inherit; text-decoration: none;">
+					<h2>Changelog</h2>
+				</a>
+				<a href="#version-2" id="version-2" style="color: inherit; text-decoration: none;">
+					<h3>Version 2</h3>
+				</a>
+				<ul>
+					<li>The generators for the code that parses the config.json have been added.</li>
+					<li>Json schemas for the validation of the json models given as inputs have been added.</li>
+					<li>Tests have been added</li>
+				</ul>
+				<a href="#version-1" id="version-1" style="color: inherit; text-decoration: none;">
+					<h3>Version 1</h3>
+				</a>
+				<p>The first version, that started by a javascript script in the main telemetry repository and have become this typescript package.</p>
+				<a href="#project-structure" id="project-structure" style="color: inherit; text-decoration: none;">
+					<h2>Project structure</h2>
+				</a>
+				<p>Made with <a href="https://github.com/eagletrt/dree">dree</a></p>
+				<pre><code><span style="color: #001080">eagletrt</span><span style="color: #000000">-</span><span style="color: #001080">code</span><span style="color: #000000">-</span><span style="color: #001080">generator</span>
+<span style="color: #000000"> ├── </span><span style="color: #0070C1">LICENSE</span>
+<span style="color: #000000"> ├── </span><span style="color: #0070C1">README</span><span style="color: #000000">.</span><span style="color: #001080">md</span>
+<span style="color: #000000"> ├── </span><span style="color: #001080">typedoc</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> ├── </span><span style="color: #001080">typedoc</span><span style="color: #000000">.</span><span style="color: #001080">dev</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> ├── </span><span style="color: #001080">webpack</span><span style="color: #000000">.</span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> ├── </span><span style="color: #AF00DB">package</span><span style="color: #000000">-</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
+<span style="color: #000000"> ├── </span><span style="color: #001080">package</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
+<span style="color: #000000"> ├─&gt; </span><span style="color: #001080">bundled</span>
+<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">lib</span>
+<span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> │   │   └─&gt; </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">d</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   └─&gt; </span><span style="color: #001080">bin</span>
+<span style="color: #000000"> │   │   └─&gt; </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> ├─&gt; </span><span style="color: #001080">dist</span>
+<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">source</span>
+<span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">bin</span>
+<span style="color: #000000"> │   │   └─&gt; </span><span style="color: #001080">lib</span>
+<span style="color: #000000"> │   └─&gt; </span><span style="color: #001080">test</span>
+<span style="color: #000000"> ├─&gt; </span><span style="color: #001080">docs</span>
+<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">directory</span><span style="color: #000000">-</span><span style="color: #001080">tree</span>
+<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">example</span>
+<span style="color: #000000"> │   └─&gt; </span><span style="color: #001080">videos</span>
+<span style="color: #000000"> ├─&gt; </span><span style="color: #001080">source</span>
+<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">bin</span>
+<span style="color: #000000"> │   │   └── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">lib</span>
+<span style="color: #000000"> │   │   ├── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">generators</span>
+<span style="color: #000000"> │   │   │   ├─&gt; </span><span style="color: #001080">bson</span>
+<span style="color: #000000"> │   │   │   │   └── </span><span style="color: #001080">bson</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   ├─&gt; </span><span style="color: #001080">config</span>
+<span style="color: #000000"> │   │   │   │   ├── </span><span style="color: #001080">config</span><span style="color: #000000">-</span><span style="color: #001080">allocator</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   │   ├── </span><span style="color: #001080">config</span><span style="color: #000000">-</span><span style="color: #001080">deallocator</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   │   ├── </span><span style="color: #001080">config</span><span style="color: #000000">-</span><span style="color: #001080">parser</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   │   ├── </span><span style="color: #001080">config</span><span style="color: #000000">-</span><span style="color: #001080">print</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   │   ├── </span><span style="color: #001080">config</span><span style="color: #000000">-</span><span style="color: #001080">type</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   │   └── </span><span style="color: #001080">configGenerator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   ├── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   └─&gt; </span><span style="color: #001080">structure</span>
+<span style="color: #000000"> │   │   │       ├── </span><span style="color: #001080">structure</span><span style="color: #000000">-</span><span style="color: #001080">allocator</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │       ├── </span><span style="color: #001080">structure</span><span style="color: #000000">-</span><span style="color: #001080">deallocator</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │       ├── </span><span style="color: #001080">structure</span><span style="color: #000000">-</span><span style="color: #001080">type</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │       └── </span><span style="color: #001080">structureGenerator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">schemas</span>
+<span style="color: #000000"> │   │   │   ├── </span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">schema</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
+<span style="color: #000000"> │   │   │   └── </span><span style="color: #001080">structure</span><span style="color: #000000">.</span><span style="color: #001080">schema</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
+<span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">types</span>
+<span style="color: #000000"> │   │   │   ├─&gt; </span><span style="color: #001080">config</span>
+<span style="color: #000000"> │   │   │   │   └── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   ├─&gt; </span><span style="color: #001080">generator</span>
+<span style="color: #000000"> │   │   │   │   └── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   ├── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   ├─&gt; </span><span style="color: #001080">options</span>
+<span style="color: #000000"> │   │   │   │   └── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │   └─&gt; </span><span style="color: #001080">structure</span>
+<span style="color: #000000"> │   │   │       └── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   └─&gt; </span><span style="color: #001080">utils</span>
+<span style="color: #000000"> │   │       ├── </span><span style="color: #001080">checkModelsSchema</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │       ├── </span><span style="color: #001080">getCodes</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │       ├── </span><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │       ├── </span><span style="color: #001080">options</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │       ├── </span><span style="color: #001080">parseTemplate</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │       └── </span><span style="color: #001080">transpile</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   └── </span><span style="color: #001080">tsconfig</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
+<span style="color: #000000"> └─&gt; </span><span style="color: #001080">test</span>
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/options.html" class="tsd-kind-icon">Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#generate" class="tsd-kind-icon">generate</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
