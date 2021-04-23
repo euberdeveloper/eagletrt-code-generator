@@ -30,6 +30,7 @@ export default function (): void {
         beforeEach(function () {
             output = '';
             console.log = (msg: string) => {
+                originalLogFunction(msg);
                 output += msg + '\n';
             };
         });
@@ -67,7 +68,7 @@ export default function (): void {
                         .generated;
                     assert(gen.comment ? true : false, `No comment for generator ${generator.name}`);
                     if (referenceCode.almostempty[gen.comment] === undefined) {
-                        assert(false, `No reference code for ${gen.comment}`);
+                        assert(false, `ANo reference code for ${gen.comment}`);
                     } else {
                         assert(
                             removeCodeFormatting(referenceCode.almostempty[gen.comment]) ===
@@ -81,21 +82,24 @@ export default function (): void {
                     }
                 }
             });
-
             it('should generate identical formatting and code for test folder structures and configs', function () {
                 const generators = getGenerators(new Logger({}));
                 for (const toTestPath of paths.toTestPaths) {
                     if (referenceCode.tests[toTestPath] === undefined) {
-                        assert(false, `No reference code for ${toTestPath}`);
+                        assert(false, `BNo reference code for ${toTestPath}`);
                     } else {
                         for (const generator of generators) {
                             const gen = new generator(
                                 JSON.parse(fs.readFileSync(toTestPath + '/structure.model.json', 'utf-8')),
                                 JSON.parse(fs.readFileSync(toTestPath + '/config.model.json', 'utf-8'))
                             ).generated;
+                            if (gen.comment !== '{{GENERATE_STRUCTURE_CAN_GATHERER_PRIMARY}}') {
+                                continue;
+                            }
+                            console.log(gen.code);
                             assert(gen.comment ? true : false, `No comment for generator ${generator.name}`);
                             if (referenceCode.tests[toTestPath][gen.comment] === undefined) {
-                                assert(false, `No reference code for ${gen.comment} in ${toTestPath}`);
+                                assert(false, `CNo reference code for ${gen.comment} in ${toTestPath}`);
                             } else {
                                 assert(
                                     removeCodeFormatting(referenceCode.tests[toTestPath][gen.comment]) ===
