@@ -33,6 +33,9 @@ const generatorsConfig = {
             }
         ]
     },
+    plugins: [
+        new webpack.EnvironmentPlugin(['IS_WEBPACK'])
+    ],
     externals: [nodeExternals()],
     output: {
         path: path.resolve(__dirname, 'bundled', 'lib', 'generators'),
@@ -96,7 +99,8 @@ const binConfig = {
         index: './source/bin/index.ts',
     },
     plugins: [
-        new webpack.BannerPlugin({ banner: '#!/usr/bin/env node', raw: true })
+        new webpack.BannerPlugin({ banner: '#!/usr/bin/env node', raw: true }),
+        new webpack.EnvironmentPlugin(['IS_WEBPACK'])
     ],
     module: {
         rules: [
