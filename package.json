@@ -41,12 +41,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eagletrt/eagletrt-code-generator.git"
+    "url": "git+https://github.com/eagletrt/code-generator.git"
   },
   "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eagletrt/eagletrt-code-generator/issues"
+    "url": "https://github.com/eagletrt/code-generator/issues"
   },
   "keywords": [
     "eagletrt",
@@ -54,7 +54,7 @@
     "code-generator",
     "c-generator"
   ],
-  "homepage": "https://eagletrt-code-generator.eagletrt.vercel.sh",
+  "homepage": "https://code-generator.eagletrt.vercel.sh",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
