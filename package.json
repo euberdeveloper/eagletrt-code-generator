@@ -1,11 +1,11 @@
 {
   "name": "@eagletrt/eagletrt-code-generator",
-  "version": "3.1.7",
+  "version": "4.0.0",
   "description": "Generate dinamically code for the eagletrt telemetry",
   "main": "bundled/lib/index.js",
   "types": "bundled/lib/index.d.ts",
   "bin": {
-    "eagle": "bundled/bin/index.js"
+    "eagle-cc": "bundled/bin/index.js"
   },
   "files": [
     "package.json",
