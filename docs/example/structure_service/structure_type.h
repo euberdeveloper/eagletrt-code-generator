@@ -245,7 +245,6 @@ typedef struct {
 	double x;
 	double y;
 	double z;
-	double scale;
 } imu_gyro_value_data;
 
 typedef struct {

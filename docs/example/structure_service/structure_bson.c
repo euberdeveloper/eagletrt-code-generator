@@ -2,7 +2,7 @@
 
 void structureToBson(data_t *data, bson_t** bson_document) {
 	*bson_document = bson_new();
-	bson_t *children = (bson_t*)malloc(sizeof(bson_t) * 5);
+	bson_t *children = (bson_t*)malloc(sizeof(bson_t) * 6);
 	BSON_APPEND_INT32(*bson_document, "id", data->id);
 	BSON_APPEND_INT64(*bson_document, "timestamp", data->timestamp);
 	BSON_APPEND_UTF8(*bson_document, "sessionName", data->sessionName);
@@ -286,7 +286,6 @@ void structureToBson(data_t *data, bson_t** bson_document) {
 		BSON_APPEND_DOUBLE(&children[2], "x", data->imu_gyro[i].value.x);
 		BSON_APPEND_DOUBLE(&children[2], "y", data->imu_gyro[i].value.y);
 		BSON_APPEND_DOUBLE(&children[2], "z", data->imu_gyro[i].value.z);
-		BSON_APPEND_DOUBLE(&children[2], "scale", data->imu_gyro[i].value.scale);
 		bson_append_document_end(&children[1], &children[2]);
 		bson_destroy(&children[2]);
 		bson_append_document_end(&children[0], &children[1]);

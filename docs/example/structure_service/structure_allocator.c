@@ -9,7 +9,7 @@ data_t* structureCreate() {
 	data->inverters.right.temperature_igbt_size = 500;
 	data->inverters.right.temperature_igbt = (inverters_right_temperature_igbt_data*) malloc(sizeof(inverters_right_temperature_igbt_data) * data->inverters.right.temperature_igbt_size);
 	data->inverters.right.temperature_igbt_count = 0;
-	data->inverters.right.temperature_motors_size = 500;
+	data->inverters.right.temperature_motors_size = 200;
 	data->inverters.right.temperature_motors = (inverters_right_temperature_motors_data*) malloc(sizeof(inverters_right_temperature_motors_data) * data->inverters.right.temperature_motors_size);
 	data->inverters.right.temperature_motors_count = 0;
 	data->inverters.left.speed_size = 500;
