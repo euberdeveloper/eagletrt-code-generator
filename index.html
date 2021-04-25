@@ -525,31 +525,30 @@
 				<pre><code><span style="color: #001080">eagletrt</span><span style="color: #000000">-</span><span style="color: #001080">code</span><span style="color: #000000">-</span><span style="color: #001080">generator</span>
 <span style="color: #000000"> ├── </span><span style="color: #0070C1">LICENSE</span>
 <span style="color: #000000"> ├── </span><span style="color: #0070C1">README</span><span style="color: #000000">.</span><span style="color: #001080">md</span>
-<span style="color: #000000"> ├── </span><span style="color: #001080">typedoc</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
-<span style="color: #000000"> ├── </span><span style="color: #001080">typedoc</span><span style="color: #000000">.</span><span style="color: #001080">dev</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
-<span style="color: #000000"> ├── </span><span style="color: #001080">webpack</span><span style="color: #000000">.</span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
-<span style="color: #000000"> ├── </span><span style="color: #AF00DB">package</span><span style="color: #000000">-</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
-<span style="color: #000000"> ├── </span><span style="color: #001080">package</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
 <span style="color: #000000"> ├─&gt; </span><span style="color: #001080">bundled</span>
-<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">lib</span>
-<span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
-<span style="color: #000000"> │   │   └─&gt; </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">d</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
-<span style="color: #000000"> │   └─&gt; </span><span style="color: #001080">bin</span>
-<span style="color: #000000"> │   │   └─&gt; </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">bin</span>
+<span style="color: #000000"> │   │   └── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> │   └─&gt; </span><span style="color: #001080">lib</span>
+<span style="color: #000000"> │       ├─&gt; </span><span style="color: #001080">generators</span>
+<span style="color: #000000"> │       ├── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">d</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │       └── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
 <span style="color: #000000"> ├─&gt; </span><span style="color: #001080">dist</span>
-<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">source</span>
-<span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">bin</span>
-<span style="color: #000000"> │   │   └─&gt; </span><span style="color: #001080">lib</span>
-<span style="color: #000000"> │   └─&gt; </span><span style="color: #001080">test</span>
+<span style="color: #000000"> │   └─&gt; </span><span style="color: #001080">source</span>
+<span style="color: #000000"> │       ├─&gt; </span><span style="color: #001080">bin</span>
+<span style="color: #000000"> │       └─&gt; </span><span style="color: #001080">lib</span>
 <span style="color: #000000"> ├─&gt; </span><span style="color: #001080">docs</span>
 <span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">directory</span><span style="color: #000000">-</span><span style="color: #001080">tree</span>
+<span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">documentation</span>
+<span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">html</span>
+<span style="color: #000000"> │   │   └─&gt; </span><span style="color: #001080">html</span><span style="color: #000000">-</span><span style="color: #001080">dev</span>
 <span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">example</span>
 <span style="color: #000000"> │   └─&gt; </span><span style="color: #001080">videos</span>
+<span style="color: #000000"> ├── </span><span style="color: #AF00DB">package</span><span style="color: #000000">-</span><span style="color: #001080">lock</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
+<span style="color: #000000"> ├── </span><span style="color: #001080">package</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
 <span style="color: #000000"> ├─&gt; </span><span style="color: #001080">source</span>
 <span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">bin</span>
 <span style="color: #000000"> │   │   └── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   ├─&gt; </span><span style="color: #001080">lib</span>
-<span style="color: #000000"> │   │   ├── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">generators</span>
 <span style="color: #000000"> │   │   │   ├─&gt; </span><span style="color: #001080">bson</span>
 <span style="color: #000000"> │   │   │   │   └── </span><span style="color: #001080">bson</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
@@ -562,10 +561,15 @@
 <span style="color: #000000"> │   │   │   │   └── </span><span style="color: #001080">configGenerator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │   │   ├── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │   │   └─&gt; </span><span style="color: #001080">structure</span>
+<span style="color: #000000"> │   │   │       ├─&gt; </span><span style="color: #001080">can</span><span style="color: #000000">-</span><span style="color: #001080">gatherer</span>
+<span style="color: #000000"> │   │   │       │   ├── </span><span style="color: #001080">structure</span><span style="color: #000000">-</span><span style="color: #001080">can</span><span style="color: #000000">-</span><span style="color: #001080">gatherer</span><span style="color: #000000">-</span><span style="color: #001080">primary</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │       │   ├── </span><span style="color: #001080">structure</span><span style="color: #000000">-</span><span style="color: #001080">can</span><span style="color: #000000">-</span><span style="color: #001080">gatherer</span><span style="color: #000000">-</span><span style="color: #001080">secondary</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   │       │   └── </span><span style="color: #001080">structureCanGathererGenerator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │   │       ├── </span><span style="color: #001080">structure</span><span style="color: #000000">-</span><span style="color: #001080">allocator</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │   │       ├── </span><span style="color: #001080">structure</span><span style="color: #000000">-</span><span style="color: #001080">deallocator</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │   │       ├── </span><span style="color: #001080">structure</span><span style="color: #000000">-</span><span style="color: #001080">type</span><span style="color: #000000">.</span><span style="color: #001080">generator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │   │       └── </span><span style="color: #001080">structureGenerator</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
+<span style="color: #000000"> │   │   ├── </span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │   ├─&gt; </span><span style="color: #001080">schemas</span>
 <span style="color: #000000"> │   │   │   ├── </span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">schema</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
 <span style="color: #000000"> │   │   │   └── </span><span style="color: #001080">structure</span><span style="color: #000000">.</span><span style="color: #001080">schema</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
@@ -587,7 +591,11 @@
 <span style="color: #000000"> │   │       ├── </span><span style="color: #001080">parseTemplate</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   │       └── </span><span style="color: #001080">transpile</span><span style="color: #000000">.</span><span style="color: #001080">ts</span>
 <span style="color: #000000"> │   └── </span><span style="color: #001080">tsconfig</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
-<span style="color: #000000"> └─&gt; </span><span style="color: #001080">test</span>
+<span style="color: #000000"> ├─&gt; </span><span style="color: #001080">test</span>
+<span style="color: #000000"> ├── </span><span style="color: #001080">tsconfig</span><span style="color: #000000">.</span><span style="color: #001080">json</span>
+<span style="color: #000000"> ├── </span><span style="color: #001080">typedoc</span><span style="color: #000000">.</span><span style="color: #001080">dev</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> ├── </span><span style="color: #001080">typedoc</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+<span style="color: #000000"> └── </span><span style="color: #001080">webpack</span><span style="color: #000000">.</span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
 </code></pre>
 			</div>
 		</div>
