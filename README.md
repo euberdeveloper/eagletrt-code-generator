@@ -481,8 +481,16 @@ The tests were made by **[Nicola Toscan](https://github.com/NicolaToscan)** with
 To run the tests execute:
 
 ```bash
-npm run transpile:test
+npm run transpile
 npm test
+```
+
+## Build
+
+To build for production, using webpack:
+
+```bash
+npm run bundle
 ```
 
 ## Changelog
