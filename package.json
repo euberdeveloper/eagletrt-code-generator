@@ -31,6 +31,7 @@
     "test": "mocha ./dist/test/index.test.js --reporter spec",
     "nyc": "nyc --extension=ts --reporter=html --reporter=text --reporter=lcov -x \"source/test\" npm run test",
     "cover": "nyc report --extension=ts --reporter=text-lcov | coveralls",
+    "docs:tree": "dree parse -o ./docs/directory-tree/dree.json -d ./docs/directory-tree .",
     "docs:html": "typedoc",
     "docs:html-dev": "typedoc --options typedoc.dev.js",
     "docs": "npm run docs:html && npm run docs:html-dev",

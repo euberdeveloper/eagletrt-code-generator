@@ -396,31 +396,30 @@ Made with [dree](https://github.com/eagletrt/dree)
 eagletrt-code-generator
  ├── LICENSE
  ├── README.md
- ├── typedoc.js
- ├── typedoc.dev.js
- ├── webpack.config.js
- ├── package-lock.json
- ├── package.json
  ├─> bundled
- │   ├─> lib
- │   │   ├─> index.js
- │   │   └─> index.d.ts
- │   └─> bin
- │   │   └─> index.js
+ │   ├─> bin
+ │   │   └── index.js
+ │   └─> lib
+ │       ├─> generators
+ │       ├── index.d.ts
+ │       └── index.js
  ├─> dist
- │   ├─> source
- │   │   ├─> bin
- │   │   └─> lib
- │   └─> test
+ │   └─> source
+ │       ├─> bin
+ │       └─> lib
  ├─> docs
  │   ├─> directory-tree
+ │   ├─> documentation
+ │   │   ├─> html
+ │   │   └─> html-dev
  │   ├─> example
  │   └─> videos
+ ├── package-lock.json
+ ├── package.json
  ├─> source
  │   ├─> bin
  │   │   └── index.ts
  │   ├─> lib
- │   │   ├── index.ts
  │   │   ├─> generators
  │   │   │   ├─> bson
  │   │   │   │   └── bson.generator.ts
@@ -433,10 +432,15 @@ eagletrt-code-generator
  │   │   │   │   └── configGenerator.ts
  │   │   │   ├── index.ts
  │   │   │   └─> structure
+ │   │   │       ├─> can-gatherer
+ │   │   │       │   ├── structure-can-gatherer-primary.generator.ts
+ │   │   │       │   ├── structure-can-gatherer-secondary.generator.ts
+ │   │   │       │   └── structureCanGathererGenerator.ts
  │   │   │       ├── structure-allocator.generator.ts
  │   │   │       ├── structure-deallocator.generator.ts
  │   │   │       ├── structure-type.generator.ts
  │   │   │       └── structureGenerator.ts
+ │   │   ├── index.ts
  │   │   ├─> schemas
  │   │   │   ├── config.schema.json
  │   │   │   └── structure.schema.json
@@ -458,5 +462,9 @@ eagletrt-code-generator
  │   │       ├── parseTemplate.ts
  │   │       └── transpile.ts
  │   └── tsconfig.json
- └─> test
+ ├─> test
+ ├── tsconfig.json
+ ├── typedoc.dev.js
+ ├── typedoc.js
+ └── webpack.config.js
 ```
