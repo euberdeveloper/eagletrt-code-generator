@@ -40,7 +40,7 @@ const generatorsConfig = {
     output: {
         path: path.resolve(__dirname, 'bundled', 'lib', 'generators'),
         filename: '[name].js',
-        library: 'eagletrt-code-generator',
+        library: '@eagletrt/code-generator',
         libraryTarget: 'umd',
         globalObject: 'this',
         umdNamedDefine: true
@@ -74,7 +74,7 @@ const libConfig = {
     },
     plugins: [
         new DtsBundleWebpack({
-            name: 'eagletrt-code-generator',
+            name: '@eagletrt/code-generator',
             main: 'dist/source/lib/index.d.ts',
             out: '../../../bundled/lib/index.d.ts'
         }),
@@ -84,7 +84,7 @@ const libConfig = {
     output: {
         path: path.resolve(__dirname, 'bundled', 'lib'),
         filename: 'index.js',
-        library: 'eagletrt-code-generator',
+        library: '@eagletrt/code-generator',
         libraryTarget: 'umd',
         globalObject: 'this',
         umdNamedDefine: true,
@@ -123,7 +123,7 @@ const binConfig = {
     externals: [{
         '../lib/index': {
             amd: '../lib/index.js',
-            root: 'eagletrt-code-generator',
+            root: '@eagletrt/code-generator',
             commonjs: '../lib/index.js',
             commonjs2: '../lib/index.js'
         }
@@ -131,7 +131,7 @@ const binConfig = {
     output: {
         path: path.resolve(__dirname, 'bundled', 'bin'),
         filename: 'index.js',
-        library: 'eagletrt-code-generator',
+        library: '@eagletrt/code-generator',
         libraryTarget: 'umd',
         globalObject: 'this',
         umdNamedDefine: true,
