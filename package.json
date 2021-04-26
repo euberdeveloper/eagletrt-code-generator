@@ -5,7 +5,7 @@
   "main": "bundled/lib/index.js",
   "types": "bundled/lib/index.d.ts",
   "bin": {
-    "eagle-cc": "bundled/bin/index.js"
+    "eagle-cg": "bundled/bin/index.js"
   },
   "files": [
     "package.json",
