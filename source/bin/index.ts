@@ -9,7 +9,7 @@ if (!process.env.IS_WEBPACK) {
 import { generateCommand } from '@bin/commands';
 
 yargs
-    .scriptName('eagletrt-cc')
+    .scriptName('eagletrt-cg')
     .command(
         generateCommand.command,
         generateCommand.description,
