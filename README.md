@@ -285,7 +285,10 @@ An example with properties regarding the can gatherer parser:
                 "name": "HV_TEMP",
                 "network": "Secondary",
                 "definitions": {
-                    "scale": "#scale + 1.5"
+                    "scale": { 
+                        "type": "double",
+                        "value": "#scale + 1.5"
+                    }
                 }
             }
         ],
