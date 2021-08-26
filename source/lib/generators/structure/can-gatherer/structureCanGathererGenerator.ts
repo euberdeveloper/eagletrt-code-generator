@@ -119,7 +119,7 @@ export abstract class StructureCanGathererGenerator extends StructureGenerator {
         this.indentation++;
 
         this.print(`${nakedMessageName}* message = (${nakedMessageName}*) malloc(sizeof(${nakedMessageName}));`);
-        this.print(`deserialize_${nakedMessageName}(data, 8, message);`);
+        this.print(`deserialize_${nakedMessageName}(data, message);`);
         this.print('');
 
         const defines = message.defines;

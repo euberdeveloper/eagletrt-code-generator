@@ -86,7 +86,7 @@ export default function (): void {
                 const generators = getGenerators(new Logger({}));
                 for (const toTestPath of paths.toTestPaths) {
                     if (referenceCode.tests[toTestPath] === undefined) {
-                        assert(false, `BNo reference code for ${toTestPath}`);
+                        assert(false, `No reference code for ${toTestPath}`);
                     } else {
                         for (const generator of generators) {
                             const gen = new generator(
