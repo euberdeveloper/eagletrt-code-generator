@@ -259,7 +259,7 @@ An example with properties regarding the can gatherer parser:
             "timestamp": "long",
             "value": {
                 "type": "double",
-                "value": "#brake"
+                "value": "#value"
             },
             "maxLength": 200,
             "name": "BRAKE",
