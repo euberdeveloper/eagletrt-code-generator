@@ -33,13 +33,13 @@ This module can be actually used both as a **local** and as a **global** npm mod
 Install the module executing:
 
 ```bash
-$ npm install --save code-generator
+$ npm install --save @eagletrt/code-generator
 ```
 
 Running this script:
 
 ```javascript
-const generator = require('code-generator');
+const generator = require('@eagletrt/code-generator');
 
 const src = './code';
 const structureModel = './code/structure.model.json';
@@ -88,13 +88,13 @@ To see all the options, refer to the **api**.
 Install the module with:
 
 ```bash
-$ npm install -g code-generator
+$ npm install -g @eagletrt/code-generator
 ```
 
 Executing:
 
 ```bash
-$ eagle-cc generate --src code --structure-model ./code/structure.model.json --config-model ./code/config.model.json --extensions c h
+$ eagle-cg generate --src code --structure-model ./code/structure.model.json --config-model ./code/config.model.json --extensions c h
 ```
 
 Will have the same result as the example with the local module.
@@ -102,7 +102,7 @@ Will have the same result as the example with the local module.
 The options are almost the same as in the **api** of the local module. To see all the cli options, run:
 
 ```bash
-$ eagle-cc generate --help
+$ eagle-cg generate --help
 ```
 
 ## The structure model file
