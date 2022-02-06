@@ -1,4 +1,4 @@
-# **403 - Permanently moved to the [eagletrt's organization](https://github.com/eagletrt)**
+# **301 - Permanently moved to the [eagletrt's organization](https://github.com/eagletrt)**
 
 ![Lint](https://github.com/eagletrt/code-generator/workflows/Lint/badge.svg)
 ![Build](https://github.com/eagletrt/code-generator/workflows/Build/badge.svg)
